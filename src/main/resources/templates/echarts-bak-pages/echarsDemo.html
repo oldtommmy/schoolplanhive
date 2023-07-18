@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../dist/echarts.min.js"></script>
+    <title>Echars快速入门</title>
+</head>
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height: 400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById("main"));
+
+         // 指定图表的配置项和数据
+        var option = {
+            title:{
+                text:'Echars入门'
+            },
+            tooltip:{},
+            legend:{
+                data:['主播礼物']
+            },
+            xAxis:{
+                data:["超级火箭","游艇","火箭","飞机","666","赞"]
+            },
+            yAxis:{},
+            series:[{
+                name:'主播礼物',
+                type:'bar',
+                data:[12,55,30,80,190,230]
+            }]
+
+        };
+
+
+        myChart.setOption(option);
+
+
+    </script>
+</body>
+</html>

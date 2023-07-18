@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../dist/echarts.min.js"></script>
+    <script src="../theme/china.js"></script>
+    <script src="../theme/mytheme.js"></script>
+   
+    <title>综合大屏展示</title>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background:url(images/bigscreen-bg.png)  no-repeat scroll top;
+            background-size: 100% 100%;
+            overflow: hidden;/*扩展盒子高度*/
+        }
+        #left_div{
+          
+            height:910px;         
+            width: 400px;
+           float: left;
+
+        }
+        #isslogo{
+            height:575px;
+           
+        }
+        #byarea{
+            height:280px;
+            width: 380px;
+            position:relative;
+            left: 20px;
+
+        }
+        #byprovince{
+            position:relative;
+            height:650px;         
+            width: 780px;
+            top: 200px;
+            left: 50px;
+            float: left;
+
+        }
+        #right_div{
+            position:relative;
+            float: right;
+            top: 200px;
+           right: 20px;
+            
+            height: 650px;         
+            width: 380px;
+
+        }
+        #topnmax{
+            height:280px;
+           
+           
+        }
+        #topnmin{
+            height:280px;
+           
+            position:relative;
+            top: 100px;
+            
+          
+
+        }
+      </style>
+   
+</head>
+<body >
+    <div id="container">
+        <div id='left_div'>
+            <!--公司logo-->
+            <div id='isslogo'></div>
+            <!--学生来源展示-->
+            <div id='byarea'></div>  
+        </div>
+<!-- 各省招生计划-->
+        <div id='byprovince'></div>
+        <div id='right_div'>
+            <!-- 热门专业Top10-->
+            <div id='topnmax'></div>
+             <!-- 冷门专业Top10-->
+            <div id='topnmin'></div> 
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var area_dom = document.getElementById("byarea");
+        var areaChart = echarts.init(area_dom);
+        var app = {};
+        option = null;
+        option = {
+            // title: {
+            //     text: '学生来源分析',
+            //     subtext: '2016年招生计划',
+            //     left: 'center'
+            // },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                left: 'center',
+                top: 'bottom',
+                data: ['东北', '华东', '华中', '华北', '华南', '西北', '西南']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                  
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel']
+                    },
+
+                }
+            },
+            series: [
+                {
+                    name: '学生来源',
+                    type: 'pie',
+                    radius: [10, 100],
+                    center: ['50%', '40%'],
+                    roseType: 'area',
+                    data: [
+                        {value: 297541, name: '东北'},
+                        {value: 1292768, name: '华东'},
+                        {value: 687938, name: '华中'},
+                        {value: 514528, name: '华北'},
+                        {value: 534479, name: '华南'},
+                        {value: 363941, name: '西北'},
+                        {value: 637507, name: '西南'}
+                        
+                    ]
+                }
+            ]
+        };
+        ;
+        if (option && typeof option === "object") {
+            areaChart.setOption(option, true);
+        }
+               </script>
+
+<!--地图方式显示各省招生数据-->
+<script type="text/javascript">
+    var dombyprovince = document.getElementById("byprovince");
+    var provinceChart = echarts.init(dombyprovince);
+    
+//    var name_title = "全国高校2016年各省市计划招生人数"
+// 使用中国地图
+var mapName = 'china'
+//要在地图上展示的数据
+var data = [
+  {name:"北京",value:35215},
+    {name:"天津",value:42196},
+    {name:"河北",value:182752},
+    {name:"山西",value:152778},
+    {name:"内蒙古",value:101587},
+    {name:"辽宁",value:103951},
+    {name:"吉林",value:84272},
+    {name:"黑龙江",value:109318},
+    {name:"上海",value:16676},
+    {name:"江苏",value:195147},
+    {name:"浙江",value:204328},
+    {name:"安徽",value:359881},
+    {name:"福建",value:107600},
+    {name:"江西",value:99041},
+    {name:"山东",value:310095},
+    {name:"河南",value:307224},
+    {name:"湖北",value:205796},
+    {name:"湖南",value:174918},
+    {name:"重庆",value:105275},
+    {name:"四川",value:260928},
+    {name:"贵州",value:163191},
+    {name:"云南",value:108113},
+    {name:"西藏",value:0},
+    {name:"陕西",value:150579},
+    {name:"甘肃",value:106798},
+    {name:"青海",value:19532},
+    {name:"宁夏",value:40113},
+    {name:"新疆",value:46919},
+    {name:"广东",value:345315},
+    {name:"广西",value:152496},
+    {name:"海南",value:36668}
+    ];
+    
+var geoCoordMap = {};
+
+
+/*获取地图数据*/
+provinceChart.showLoading();
+var mapFeatures = echarts.getMap(mapName).geoJson.features;
+provinceChart.hideLoading();
+mapFeatures.forEach(function(v) {
+    // 地区名称
+    var name = v.properties.name;
+    // 地区经纬度
+    geoCoordMap[name] = v.properties.cp;
+    
+
+});
+
+//convertData函数，组装在地图上展示的数据，包含省份的经纬度坐标和业务数据。
+var convertData = function(data) {
+    var res = [];
+    for (var i = 0; i < data.length; i++) {
+        var geoCoord = geoCoordMap[data[i].name];
+        if (geoCoord) {
+            res.push({
+                name: data[i].name,
+                value: geoCoord.concat(data[i].value),
+            });
+        }
+    }
+
+    return res;
+};
+optionProvince = {
+    // title: {
+    //     text: name_title,
+     
+    //     x: 'center'
+    // },
+    //tooltip，提示框显示内容
+    tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+   
+                var toolTiphtml = ''
+                for(var i = 0;i<data.length;i++){
+                    if(params.name==data[i].name){
+                        
+                       
+                            toolTiphtml+=data[i].name+':'+data[i].value+"<br>"
+                        
+                    }
+                }
+
+                return toolTiphtml;
+            
+        }
+    },
+//visualMap，视觉组件
+    visualMap: {
+        show: true,
+        min: 0,
+        max: 200,
+        left: 'left',
+        top: 'bottom',
+        text: ['高', '低'], // 文本，默认为数值文本
+        calculable: true,
+        seriesIndex: [1],
+        inRange: {
+            // color: ['#3B5077', '#031525'] // 蓝黑
+            // color: ['#ffc0cb', '#800080'] // 红紫
+            // color: ['#3C3B3F', '#605C3C'] // 黑绿
+            // color: ['#0f0c29', '#302b63', '#24243e'] // 黑紫黑
+            // color: ['#23074d', '#cc5333'] // 紫红
+            color: ['#00467F', '#A5CC82'] // 蓝绿
+            // color: ['#1488CC', '#2B32B2'] // 浅蓝
+            // color: ['#00467F', '#A5CC82'] // 蓝绿
+            // color: ['#00467F', '#A5CC82'] // 蓝绿
+            // color: ['#00467F', '#A5CC82'] // 蓝绿
+            // color: ['#00467F', '#A5CC82'] // 蓝绿
+
+        }
+    },
+//geo，地理坐标系组件
+    geo: {
+        show: true,
+        map: mapName,
+        label: {
+            normal: {
+                show: false
+            },
+            emphasis: {
+                show: false,
+            }
+        },
+        roam: true,
+        itemStyle: {
+            normal: {
+                areaColor: '#031525',
+                borderColor: '#3B5077',
+            },
+            emphasis: {
+                areaColor: '#2B91B7',
+            }
+        }
+    },
+    series: [{//显示地图上各个省份坐标点，坐标点大小与招生人数成比例设置。
+            name: '散点',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertData(data),
+            symbolSize: function(val) {
+                return val[2] / 10000+2;//显示大小最小为2
+            },
+            label: {
+                normal: {
+                    formatter: '{b}',//数据项的名称，这里是省份名
+                    position: 'right',
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#05C3F9'
+                }
+            }
+        },
+        {//地图显示
+            type: 'map',
+            map: mapName,//显示中国地图
+            geoIndex: 0,
+            aspectScale: 0.75, //用于 scale 地图的长宽比
+            showLegendSymbol: false, // 存在legend时显示
+            label: {
+                normal: {
+                    show: true
+                },
+                emphasis: {
+                    show: false,
+                    textStyle: {
+                        color: '#fff'
+                    }
+                }
+            },
+            roam: true,
+            itemStyle: {
+                normal: {
+                    areaColor: '#031525',
+                    borderColor: '#3B5077',
+                },
+                emphasis: {
+                    areaColor: '#2B91B7'
+                }
+            },
+            animation: false,//是否开启动画
+            data: data
+        },
+        {//以气泡的形式显示各省招生计划的值
+            name: '点',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            symbol: 'pin', //气泡
+            symbolSize: function(val) {
+               //将数据缩小，但保证最小气泡至少为20
+                return val[2]/10000 + 20;
+            },
+            label: {
+                normal: {
+                    formatter: function(a){return a.value[2];} ,//气泡上显示招生数 a.name是省份名，a.value是数组包含经度，维度，用户数据
+                    show: true,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 8,
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#F62157', //标志颜色
+                }
+            },
+            zlevel: 6,
+            data:convertData(data),//省份名，经度纬度，用户数据
+        },
+        {//显示招生前5的省份。
+            name: 'Top 5',
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+             //对数组排序，截取前五个数组对象
+            data: convertData(data.sort(function(a, b) {
+                return b.value - a.value;
+            }).slice(0, 5)),
+            symbolSize: function(val) {
+                return val[2] / 10000;
+            },
+            showEffectOn: 'render',
+            rippleEffect: {
+                brushType: 'stroke'
+            },
+            hoverAnimation: true,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: 'yellow',
+                    shadowBlur: 10,
+                    shadowColor: 'yellow'
+                }
+            },
+            zlevel: 1
+        },
+
+    ]
+};
+    provinceChart.setOption(optionProvince);
+           </script>
+
+    <!-- 热门专业显示 -->
+
+    <script type="text/javascript">
+        var dom_topn_max = document.getElementById("topnmax");
+        var topNMaxChart = echarts.init(dom_topn_max,"mytheme");
+        var app = {};
+        option = null;
+        option = {
+    //       title: [{
+    //       left: 'center',
+    //       text: '招生最多的专业top 10'
+    //   }],
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true
+          },
+          yAxis: {
+            type: "category",
+            data: [
+              "国际经济与贸易",
+              "护理",
+              "法学",
+              "电气工程及其自动化",
+              "财务管理",
+              "土木工程",
+              "计算机科学与技术",
+              "会计(会计电算化)",
+              "英语",
+              "会计学",
+            ],
+          },
+          xAxis: {
+            type: "value",
+          },
+          series: [
+            {
+              data: [
+                54814,
+                57507,
+                59041,
+                61506,
+                64951,
+                66319,
+                66463,
+                78128,
+                82535,
+                86568,
+              ],
+              type: "bar",
+              label: {
+                show: true,
+                position: "right",
+              },
+            },
+          ],
+        };
+        if (option && typeof option === "object") {
+            topNMaxChart.setOption(option, true);
+        }
+      </script>
+    <!-- 冷门专业显示 -->
+    <script type="text/javascript">
+        var dom_topn_min = document.getElementById("topnmin");
+        var topn_min_Chart = echarts.init(dom_topn_min,'mytheme');
+        var app = {};
+        option = null;
+        option = {
+    //       title: [{
+    //       left: 'center',
+    //       text: '招生最少的专业top 10'
+    //   }],
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true
+          },
+          yAxis: {
+            type: "category",
+            data: [
+              "儿童康复",
+              "煤质分析技术",
+              "矿山安全技术与监察",
+              "森林消防(森林防火指挥与通讯)",
+              "固体矿床露天开采技术",
+              "科技成果中介服务",
+              "全球健康学",
+              "大气探测技术",
+              "乐器制造技术",
+              "会宗教学计学",
+            ],
+          },
+          xAxis: {
+            type: "value",
+          },
+          series: [
+            {
+              data: [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+              ],
+              type: "bar",
+              label: {
+                show: true,
+                position: "right",
+              },
+            },
+          ],
+        };
+        if (option && typeof option === "object") {
+            topn_min_Chart.setOption(option, true);
+        }
+      </script>
+
+
+</body>
+</html>

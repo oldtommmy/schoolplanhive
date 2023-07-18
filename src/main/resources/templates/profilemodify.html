@@ -1,0 +1,425 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>高校招生计划可视化系统</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/media/image/favicon.png"/>
+
+    <!-- Plugin styles -->
+    <link rel="stylesheet" href="vendors/bundle.css" type="text/css">
+
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="vendors/datepicker/daterangepicker.css">
+
+    <!-- Vmap -->
+    <link rel="stylesheet" href="vendors/vmap/jqvmap.min.css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <style type="text/css">
+
+      </style>
+</head>
+<body>
+
+<!-- begin::preloader-->
+<div class="preloader">
+    <div class="preloader-icon"></div>
+</div>
+<!-- end::preloader -->
+
+<!-- begin::header -->
+<div class="header">
+
+    <div>
+        <ul class="navbar-nav">
+
+            <!-- begin::navigation-toggler -->
+            <li class="nav-item navigation-toggler">
+                <a href="#" class="nav-link" title="Hide navigation">
+                    <i data-feather="arrow-left"></i>
+                </a>
+            </li>
+            <li class="nav-item navigation-toggler mobile-toggler">
+                <a href="#" class="nav-link" title="Show navigation">
+                    <i data-feather="menu"></i>
+                </a>
+            </li>
+            <!-- end::navigation-toggler -->
+
+
+        </ul>
+    </div>
+
+    <div>
+        <ul class="navbar-nav">
+
+            <!-- begin::header search -->
+            <li class="nav-item">
+                <a href="#" class="nav-link" title="搜索" data-toggle="dropdown">
+                    <i data-feather="search"></i>
+                </a>
+                <div class="dropdown-menu p-2 dropdown-menu-right">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="搜索">
+                            <div class="input-group-prepend">
+                                <button class="btn" type="button">
+                                    <i data-feather="search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <!-- end::header search -->
+
+            <!-- begin::header minimize/maximize -->
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link" title="全屏" data-toggle="fullscreen">
+                    <i class="maximize" data-feather="maximize"></i>
+                    <i class="minimize" data-feather="minimize"></i>
+                </a>
+            </li>
+            <!-- end::header minimize/maximize -->
+
+        </ul>
+
+        <!-- begin::mobile header toggler -->
+        <ul class="navbar-nav d-flex align-items-center">
+            <li class="nav-item header-toggler">
+                <a href="#" class="nav-link">
+                    <i data-feather="arrow-down"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- end::mobile header toggler -->
+    </div>
+
+</div>
+<!-- end::header -->
+
+<!-- begin::main -->
+<div id="main">
+
+    <!-- begin::navigation -->
+    <div class="navigation">
+
+        <div class="navigation-menu-tab">
+            <div>
+                <div class="navigation-menu-tab-header" data-toggle="tooltip" title="花木兰" data-placement="right">
+                    <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
+                        <figure class="avatar avatar-sm">
+                            <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="avatar">
+                        </figure>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+                        <div class="p-3 text-center" data-backround-image="assets/media/image/image1.jpg">
+                            <figure class="avatar mb-3">
+                                <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="image">
+                            </figure>
+                            <h6 class="d-flex align-items-center justify-content-center">
+                                花木兰
+                                <a href="#" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
+                                    <i data-feather="edit-2"></i>
+                                </a>
+                            </h6>
+                            <small>等级: <strong>珀金</strong></small>
+                        </div>
+                        <div class="dropdown-menu-body">
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item">个人中心</a>
+                                <a href="#" class="list-group-item d-flex">
+                                    收件箱 <span class="text-muted ml-auto">18</span>
+                                </a>
+                                <a href="#" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
+                                <a href="login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-grow-1">
+                <ul>
+                    <li>
+                        <a href="#" data-toggle="tooltip" data-placement="right" title="展示大屏"
+                           data-nav-target="#bigscreen">
+                            <i data-feather="bar-chart-2"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="#" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
+                            <i data-feather="home"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"  class="active" data-toggle="tooltip" data-placement="right" title="个人中心"
+                           data-nav-target="#mycenter">
+                            <i data-feather="layers"></i>
+                        </a>
+                    </li>
+ 
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <a href="#"  data-toggle="tooltip" data-placement="right" title="设置" data-nav-target="#settings">
+                            <i data-feather="settings"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.html" data-toggle="tooltip" data-placement="right" title="登出">
+                            <i data-feather="log-out"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- begin::navigation menu -->
+        <div class="navigation-menu-body">
+
+            <!-- begin::navigation-logo -->
+            <div>
+                <div id="navigation-logo">
+                    <a href="index.html">
+                        <img class="logo" src="assets/media/image/logo.png" alt="logo">
+                        <img class="logo-light" src="assets/media/image/logo-light.png" alt="light logo">
+                    </a>
+                </div>
+            </div>
+            <!-- end::navigation-logo -->
+
+            <div class="navigation-menu-group">
+
+                <div  id="bigscreen">
+                    <ul>
+                        <li class="navigation-divider">展示大屏</li>                   
+                        <li><a class="active" href="index.html">综合展示大屏</a></li>
+                        
+                    </ul>
+                </div>
+                <div   id="myquery">
+                    <ul>
+                        <li class="navigation-divider">分析查询</li>
+                        <li>
+                            <a href="myquery.html">
+                                <span>综合查询</span>
+                               
+                            </a>
+                        </li>
+                        <li>
+                            <a href="topnmax-index.html">
+                                <span>热门专业</span>
+                               
+                            </a>
+                        </li>
+                        <li>
+                            <a href="topnmin-index.html">
+                                <span>冷门专业</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="byarea.html">
+                                <span>区域统计</span>
+                                
+                            </a>
+                        </li>
+                    </ul>
+ 
+                </div>
+                <div  class="open" id="mycenter">
+                    <ul>
+                        <li class="navigation-divider">个人中心</li>
+                        <li><a href="myprofile.html">我的资料</a></li>
+                        <li><a href="changepwd.html">修改密码</a></li>
+                    </ul>
+                </div>
+                <div id="settings">
+                    <ul>
+                        <li class="navigation-divider">设置</li>                     
+                        <li><a href="globalset.html">全局设置</a></li>                                                    
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end::navigation menu -->
+
+    </div>
+    <!-- end::navigation -->
+
+    <!-- begin::main-content -->
+    <div class="main-content">
+
+        <!-- begin::page-header -->
+        <div class="page-header">
+            <div class="container-fluid d-sm-flex justify-content-between">
+                <h4>修改个人信息</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="#">首页</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">个人中心</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- end::page-header -->
+
+        <!-- begin::page content -->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    <div class="card">
+                        
+                        <div class="card-body text-center">
+                            <figure class="avatar avatar-lg m-b-20">
+                                <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="...">
+                            </figure>
+                            <h5 class="mb-1">huamulan</h5>
+                            <p class="text-muted small">普通用户</p>
+
+                            <h6 class="card-title d-flex justify-content-between align-items-center">
+                                基本信息
+                            </h6>
+                               
+                            <form>
+                                <div class="form-group row">
+                                    <label for="username" class="col-sm-2 col-form-label">用户名:</label>
+                                    <div class="col-sm-10">
+                                      <input type="text"  class="form-control" id="username" value="huamulan">
+                                    </div>
+                                  </div>
+                                <div class="form-group row">
+                                  <label for="realname" class="col-sm-2 col-form-label">姓名:</label>
+                                  <div class="col-sm-10">
+                                    <input type="text"  class="form-control" id="realname" value="花木兰">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label for="mobile" class="col-sm-2 col-form-label">手机号：</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="mobile" value="13888888888">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="email" class="col-sm-2 col-form-label">Email：</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="email" value="xiuzhong.li@qq.com">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="gender" class="col-sm-2 col-form-label">性别：</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" name="gender" type="radio" id="gender-male" value="男">
+                                        <label class="form-check-label" for="gender-male">男</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" name="gender" checked type="radio" id="gender-female" value="女">
+                                        <label class="form-check-label" for="gender-female">女</label>
+                                      </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="portrait">
+                                          <label class="custom-file-label" for="portrait">更换头像</label>
+                                    </div>
+                                </div>
+                                   
+                                <button class="btn btn-outline-primary">
+                                    <i data-feather="edit-2" class="mr-2"></i>保存
+                                </button>
+                                   
+                                
+                               
+                              </form>                 
+                         
+                        </div>
+                         
+                    </div>
+                                      
+                </div>
+            </div>
+
+            
+
+        </div>
+        <!-- end::page content -->
+
+        <!-- begin::footer -->
+        <footer>
+            <div class="container-fluid">
+                <div>© 2022 高校招生统计分析可视化系统 v1.0.0 Made for <a href="#">Demo</a></div>
+                <div>
+                    <nav class="nav">
+                        <a href="" class="nav-link">免责声明</a>
+                        <a href="#" class="nav-link">帮助中心</a>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+        <!-- end::footer -->
+
+    </div>
+    <!-- end::main-content -->
+
+</div>
+<!-- end::main -->
+
+<!-- Plugin scripts -->
+<script src="vendors/bundle.js"></script>
+
+<!-- Chartjs -->
+<script src="vendors/charts/chartjs/chart.min.js"></script>
+
+<!-- Apex chart -->
+<script src="vendors/charts/apex/apexcharts.min.js"></script>
+
+<!-- Circle progress -->
+<script src="vendors/circle-progress/circle-progress.min.js"></script>
+
+<!-- Peity -->
+<script src="vendors/charts/peity/jquery.peity.min.js"></script>
+<script src="assets/js/examples/charts/peity.js"></script>
+
+<!-- Datepicker -->
+<script src="vendors/datepicker/daterangepicker.js"></script>
+
+<!-- Slick -->
+<script src="vendors/slick/slick.min.js"></script>
+
+<!-- Vamp -->
+<script src="vendors/vmap/jquery.vmap.min.js"></script>
+<script src="vendors/vmap/maps/jquery.vmap.usa.js"></script>
+<script src="assets/js/examples/vmap.js"></script>
+
+<!-- Dashboard scripts -->
+<script src="assets/js/examples/dashboard.js"></script>
+<div class="colors"> <!-- To use theme colors with Javascript -->
+    <div class="bg-primary"></div>
+    <div class="bg-primary-bright"></div>
+    <div class="bg-secondary"></div>
+    <div class="bg-secondary-bright"></div>
+    <div class="bg-info"></div>
+    <div class="bg-info-bright"></div>
+    <div class="bg-success"></div>
+    <div class="bg-success-bright"></div>
+    <div class="bg-danger"></div>
+    <div class="bg-danger-bright"></div>
+    <div class="bg-warning"></div>
+    <div class="bg-warning-bright"></div>
+</div>
+
+<!-- App scripts -->
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>

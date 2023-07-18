@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+  <head>
+    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../dist/echarts.min.js"></script>
+    <script src="../theme/dark.js"></script>
+    <title>招生最多的专业Top10</title>
+  </head>
+  <body style="height: 100%; margin: 0;">
+    <div id="container" style="height: 100%;"></div>
+
+    <script type="text/javascript">
+      var dom = document.getElementById("container");
+      var myChart = echarts.init(dom, "dark");
+      var app = {};
+      option = null;
+      option = {
+        title: [{
+        left: 'center',
+        text: '招生最多的专业top 10'
+    }],
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true
+        },
+        yAxis: {
+          type: "category",
+          data: [
+            "国际经济与贸易",
+            "护理",
+            "法学",
+            "电气工程及其自动化",
+            "财务管理",
+            "土木工程",
+            "计算机科学与技术",
+            "会计(会计电算化)",
+            "英语",
+            "会计学",
+          ],
+        },
+        xAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            data: [
+              54814,
+              57507,
+              59041,
+              61506,
+              64951,
+              66319,
+              66463,
+              78128,
+              82535,
+              86568,
+            ],
+            type: "bar",
+            label: {
+              show: true,
+              position: "right",
+            },
+          },
+        ],
+      };
+      if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+      }
+    </script>
+  </body>
+</html>
