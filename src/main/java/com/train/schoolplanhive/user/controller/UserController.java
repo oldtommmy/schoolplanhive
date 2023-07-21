@@ -21,11 +21,13 @@ public class UserController {
     @Autowired
     private UserService userService;
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
+
     @RequestMapping("tologin")
     public String toLogin(){
         LOGGER.debug("begin to login>>>>>>>>>");
         return "login";
     }
+
     @RequestMapping("dologin")
     public String doLogin(String username,
                           String pwd,

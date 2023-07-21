@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.train.schoolplanhive.user.dao.TemplateDao">
+
+    <insert id="addRecord">
+        insert into ${tableName}
+        <if test="map != null">
+            <foreach collection="map" index="index" item="item" open="(" separator="," close=")">
+                ${index}
+            </foreach>
+        </if>
+        values(
+        <if test="map != null">
+            <foreach collection="map" index="index" item="item" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        )
+    </insert>
+
+    <update id="updateRecord">
+        update ${tableName}
+        set
+        <foreach collection="map" index="index" item="item" open=" " separator="," close=" ">
+            ${index}=#{item}
+        </foreach>
+        where
+        id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="queryTableDetailsByDate" resultType="HashMap">
+        SELECT *
+        FROM ${tableName}
+        WHERE 1 = 1
+        <if test="map != null">
+            AND
+            <foreach collection="map" index="index" item="item" open="(" separator="and" close=")">
+                ${index}=#{item}
+            </foreach>
+        </if>
+        <if test="fuzzyQueryMap != null">
+            AND
+            <foreach collection="fuzzyQueryMap" index="index" item="item" open="(" separator="and" close=")">
+                ${index} LIKE "%${item}%"
+            </foreach>
+        </if>
+        <if test="date != null" >
+            AND ${date.field}  BETWEEN #{date.startDate} and #{date.endDate}
+        </if>
+        ORDER BY id DESC
+
+
+
+    </select>
+    <select id="selectLastInsertID" resultType="java.lang.Integer">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+
+</mapper>
