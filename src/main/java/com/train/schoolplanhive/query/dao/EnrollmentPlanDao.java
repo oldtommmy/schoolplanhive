@@ -43,7 +43,7 @@ public interface EnrollmentPlanDao {
 
 
     @Select({"<script>",
-            "select profess,sum(plan) as plan_total ,major_code from enrollment_plan " ,
+            "select profess, sum(plan) as plan_total ,major_code from enrollment_plan " ,
             "<where>",
             "<if test='school != null'>school = #{school}</if>",
             "<if test='province != null'>and province = #{province}</if>",

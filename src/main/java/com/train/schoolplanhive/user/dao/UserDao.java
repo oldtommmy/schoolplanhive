@@ -2,6 +2,7 @@ package com.train.schoolplanhive.user.dao;
 import com.train.schoolplanhive.user.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,4 +16,13 @@ import org.springframework.stereotype.Repository;
 public interface UserDao {
     @Select("select * from userinfo where username=#{username}")
     public User getUser(String username);
+
+    @Select("select * from userinfo where email=#{email}")
+    public User getUserByEmail(String email);
+
+    @Update("update userinfo set username=#{username}, real_name=#{realName}, email=#{email}, " +
+            "mobile=#{mobile},gender=#{gender},\n" +
+            "pwd=#{pwd},status=#{status},role=#{role}\n" +
+            "where id=#{id}")
+    public void updateUser(User user);
 }

@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
 /**
  * create by tommychan at 2023/7/18
  *
- * @Description:
+ * @Description: User
  */
 @Controller
 @RequestMapping("user")
@@ -22,6 +23,39 @@ public class UserController {
     @Autowired
     private UserService userService;
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
+
+    @RequestMapping("/update")
+    public void update(String username, String realname, String mobile,
+                        String email, String gender) {
+        User user = new User();
+        user.setUsername(username);
+        user.setRealName(realname);
+        user.setMobile(mobile);
+        user.setEmail(email);
+        user.setGender(gender);
+        userService.update(user);
+    }
+
+    @RequestMapping("/profilemodify.html")
+    public String toModify() {
+        return "profilemodify.html";
+    }
+
+    @RequestMapping("/toProfile")
+    public String toEditProfile() {
+        return "myprofile.html";
+    }
+
+    @RequestMapping("/recover-password.html")
+    public String toRecover() {
+        return "/recover-password.html";
+    }
+
+    @RequestMapping("/doRecover")
+    public String doRecover(String emailOrUsername) {
+        String result = userService.recoverPwd(emailOrUsername);
+        return "/recover-password.html";
+    }
 
     @ApiOperation("退出登录")
     @RequestMapping ("login.html")

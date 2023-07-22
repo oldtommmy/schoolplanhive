@@ -210,26 +210,24 @@
                     <ul>
                         <li class="navigation-divider">分析查询</li>
                         <li>
-                            <a href="myquery.html">
+                            <a href="/query/myquery.html">
                                 <span>综合查询</span>
                                
                             </a>
                         </li>
                         <li>
-                            <a href="topnmax-index.html">
+                            <a href="/query/topnmax-index.html">
                                 <span>热门专业</span>
-                               
                             </a>
                         </li>
                         <li>
-                            <a href="topnmin-index.html">
+                            <a href="/query/topnmin-index.html">
                                 <span>冷门专业</span>
                             </a>
                         </li>
                         <li>
-                            <a href="byarea.html">
+                            <a href="/query/byarea.html">
                                 <span>区域统计</span>
-                                
                             </a>
                         </li>
                     </ul>
@@ -285,26 +283,27 @@
                      
                             <div class="app-action">
                                 
-                                    <form>
+                                    <form action="query/myquery.html" method="post">
                                         <div class="form-row">
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="学校名称">
+                                                <input type="text" name="school" class="form-control" placeholder="学校名称">
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="专业名称">
+                                                <input type="text" name="profess" class="form-control" placeholder="专业名称">
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="省份">
+                                                <input type="text" name="province" class="form-control" placeholder="省份">
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="招生年份">
+                                                <input type="text" name="year" class="form-control" placeholder="招生年份">
                                             </div>
                                             <div class="col">
-                                                <button type="button" class="btn btn-secondary"><i data-feather="search"></i>&nbsp;查询</button>
+                                                <button type="submit" class="btn btn-secondary"><i data-feather="search"></i>&nbsp;查询</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
+
                                 <div>                                  
                                     <ul class="list-inline">
                                         <li class="list-inline-item mb-0">
@@ -347,94 +346,50 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1000 </th>
-                                                <td>清华大学</td>
-                                                <td>吉林</td>
-                                                <td>土木工程</td>
-                                                <td> 1072</td>
-                                                <td>理工</td>
-                                                <td>1</td>
-                                                <td>9</td>
-                                                <td>2016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1002 </th>
-                                                <td>北京大学</td>
-                                                <td>吉林</td>
-                                                <td>基础数学</td>
-                                                <td> 14102</td>
-                                                <td>理工</td>
-                                                <td>1</td>
-                                                <td>6</td>
-                                                <td>2016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1003 </th>
-                                                <td>南京大学</td>
-                                                <td>吉林</td>
-                                                <td>软件工程</td>
-                                                <td> 1202</td>
-                                                <td>理工</td>
-                                                <td>1</td>
-                                                <td>3</td>
-                                                <td>2016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1004 </th>
-                                                <td>吉林大学</td>
-                                                <td>吉林</td>
-                                                <td>建筑工程</td>
-                                                <td> 1112</td>
-                                                <td>理工</td>
-                                                <td>1</td>
-                                                <td>7</td>
-                                                <td>2016</td>  
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1005 </th>
-                                                <td>深圳大学</td>
-                                                <td>吉林</td>
-                                                <td>机电工程</td>
-                                                <td> 1002</td>
-                                                <td>理工</td>
-                                                <td>1</td>
-                                                <td>9</td>
-                                                <td>2016</td>
-                                                
-                                            </tr>
+                                            <div th:each="item:${pageInfo.list}">
+                                                <tr>
+                                                    <th scope="row" th:text="${item.id}"></th>
+                                                    <td th:text="${item.school}"></td>
+                                                    <td th:text="${item.province}"></td>
+                                                    <td th:text="${item.profess}"></td>
+                                                    <td th:text="${item.majorCode}"></td>
+                                                    <td th:text="${item.subject}"></td>
+                                                    <td th:text="${item.batch}"></td>
+                                                    <td th:text="${item.plan}"></td>
+                                                    <td th:text="${item.year}"></td>
+                                                </tr>
+                                            </div>
 
                                         </tbody>
                                         </table>
                                         <!-- 分页开始-->
-                                        <nav aria-label="...">
-                                            <ul class="pagination justify-content-end">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">下一页</a>
-                                            </li>
-                                            </ul>
-                                        </nav>
+<!--                                        <nav aria-label="...">-->
+<!--                                            <ul class="pagination justify-content-end">-->
+<!--                                            <li class="page-item disabled">-->
+<!--                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>-->
+<!--                                            </li>-->
+<!--                                            <li class="page-item"><a class="page-link" href="query/myquery.html">1</a></li>-->
+<!--                                            <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                            <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                                            <li class="page-item">-->
+<!--                                                <a class="page-link" href="#">下一页</a>-->
+<!--                                            </li>-->
+<!--                                            </ul>-->
+<!--                                        </nav>-->
                                         <!-- 分页结束-->
-                                    </div>
-                                
+                                        <div class="pagination justify-content-end">
+                                            <a th:href="@{query/myquery.html(pageNo=${pageInfo.list.pageNum}-1)}" class=" item" th:unless="${pageInfo.list.pageNum == 1}">上一页</a>
+<!--                                            <span class="page-go-form"><label>跳转至</label>-->
+<!--                                                     <input type="text" name="inputPage" id="inputPage" class="page-key" />页 document.getElementById("inputPage").value-->
+<!--                                                     <button type="button" class="page-btn" href="query/myquery.html?"+document.getElementById("inputPage").value>GO</button>-->
+<!--                                            </span>-->
+                                         <a th:href="@{query/myquery.html(pageNo=${pageInfo.list.pageNum}+1)}" class=" item" th:unless="${pageInfo.list.pageNum == pageInfo.list.pages}">下一页</a>
 
-                                
-                               
-                               
+                                        </div>
+                              </div>
                                 </div>
-                           
-
                         </div>
-
                     </div>
-                
-
                                       
                 </div>
             </div>

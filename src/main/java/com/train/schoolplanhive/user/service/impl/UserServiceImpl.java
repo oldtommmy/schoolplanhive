@@ -19,4 +19,26 @@ public class UserServiceImpl implements UserService {
     public User login(String username) {
         return userDao.getUser(username);
     }
+
+    @Override
+    public String recoverPwd(String emailOrUsername) {
+        User userByName = userDao.getUser(emailOrUsername);
+        User userByEmail = userDao.getUserByEmail(emailOrUsername);
+        if (userByEmail == null && userByName == null) {
+            return "Error";
+        }
+        if (userByName != null) {
+            userByName.setPwd("111111");
+            userDao.updateUser(userByName);
+        } else {
+            userByEmail.setPwd("111111");
+            userDao.updateUser(userByEmail);
+        }
+        return "Success";
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.updateUser(user);
+    }
 }

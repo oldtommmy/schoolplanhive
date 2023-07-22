@@ -7,6 +7,7 @@ import com.train.schoolplanhive.query.service.EnrollmentPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -63,19 +64,19 @@ public class QueryController {
         }
 
 
-        model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("pageInfo", pageInfo);
         //session.setAttribute("queryCondition",queryCondition);
 
-
         return "myquery";
-
     }
 
+
+
     @RequestMapping("topnmax-index.html")
-    public String hotTopNQuery(String school,String province,Model model){
+    public String hotTopNQuery(String school, String province, Model model){
         System.out.println("to hot top n query>>>>>");
-        System.out.println("school=" +school);
-        System.out.println("province="+province);
+        System.out.println("school=" + school);
+        System.out.println("province="+ province);
         if(school != null && school.trim().equals("")){
             school = null;
         }
@@ -83,13 +84,13 @@ public class QueryController {
             province = null;
         }
 
-        List<EnrollPlanStatis> enrollPlanStatisList = enrollmentPlanService.getMajorStatis(school,province,true,10);
+        List<EnrollPlanStatis> enrollPlanStatisList = enrollmentPlanService.getMajorStatis(school, province,true,10);
 
         System.out.println(enrollPlanStatisList);
         model.addAttribute("enrollPlanStatisList",enrollPlanStatisList);
-
         return "topnmax-index";
     }
+
     @RequestMapping("topnmin-index.html")
     public String topnCoolNQuery(String school,String province,Model model){
         System.out.println("to cool top n query>>>>>");

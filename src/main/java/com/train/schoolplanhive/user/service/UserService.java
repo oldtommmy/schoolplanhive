@@ -10,4 +10,8 @@ import com.train.schoolplanhive.user.model.User;
  */
 public interface UserService {
     public User login(String username);
+
+    public String recoverPwd(String emailOrUsername);
+
+    public void update(User user);
 }
