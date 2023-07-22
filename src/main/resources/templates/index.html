@@ -161,7 +161,7 @@
                                     收件箱 <span class="text-muted ml-auto">18</span>
                                 </a>
                                 <a href="#" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
-                                <a href="login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
+                                <a href="/user/login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
                             </div>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="login.html" data-toggle="tooltip" data-placement="right" title="登出">
+                        <a href="user/login.html" data-toggle="tooltip" data-placement="right" title="登出">
                             <i data-feather="log-out"></i>
                         </a>
                     </li>
@@ -228,19 +228,17 @@
                         
                     </ul>
                 </div>
-                <div   id="myquery">
+                <div id="myquery">
                     <ul>
                         <li class="navigation-divider">分析查询</li>
                         <li>
-                            <a href="myquery.html">
+                            <a href="query/myquery.html">
                                 <span>综合查询</span>
-                               
                             </a>
                         </li>
                         <li>
                             <a href="topnmax-index.html">
                                 <span>热门专业</span>
-                               
                             </a>
                         </li>
                         <li>
@@ -251,7 +249,6 @@
                         <li>
                             <a href="byarea.html">
                                 <span>区域统计</span>
-                                
                             </a>
                         </li>
                     </ul>
@@ -296,6 +293,7 @@
         </div>
         <!-- end::page-header -->
 
+
         <!-- begin::page content -->
         <div class="container-fluid">
 
@@ -320,9 +318,10 @@
                                        
                                    
                                       <!--学生来源展示-->
-                                    <div id='byarea'></div>
+                                    <div id='byarea' ></div>
 
-                             
+
+
                                 </div>
                              
                             </div> 
@@ -334,8 +333,11 @@
                 </div>
             </div>
 
-            
-
+            <span id="areaPlanData" th:text="${areaPlanData}" style="display: none"></span>
+            <script>
+                var areaPlanData = $("#areaPlanData")
+                console.log(areaPlanData)
+            </script>
         </div>
         <!-- end::page content -->
 
@@ -403,12 +405,15 @@
     <div class="bg-warning-bright"></div>
 </div>
 
+
 <!-- App scripts -->
 <script src="assets/js/app.js"></script>
 <!-- echarts script begin-->
 <script src="echarts/dist/echarts.min.js"></script>
 <script src="echarts/theme/china.js"></script>
 <script src="echarts/theme/mytheme.js"></script>
+
+<script src="assets/js/jquery.js"></script>
 
 <!-- echarts script end-->
 
@@ -451,24 +456,15 @@
                 radius: [10, 100],
                 center: ['50%', '40%'],
                 roseType: 'area',
-                data: [
-                    {value: 297541, name: '东北'},
-                    {value: 1292768, name: '华东'},
-                    {value: 687938, name: '华中'},
-                    {value: 514528, name: '华北'},
-                    {value: 534479, name: '华南'},
-                    {value: 363941, name: '西北'},
-                    {value: 637507, name: '西南'}
-                    
-                ]
+               // data: "${areaPlanData}"
             }
         ]
     };
-    ;
+
     if (option && typeof option === "object") {
         areaChart.setOption(option, true);
     }
-           </script>
+</script>
 
 <!--地图方式显示各省招生数据-->
 <script type="text/javascript">
