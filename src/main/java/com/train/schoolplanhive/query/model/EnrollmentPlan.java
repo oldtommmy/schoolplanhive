@@ -21,7 +21,7 @@ public class EnrollmentPlan {
     private String subject;     //专业大类 1：文史 2：理工
     private Integer batch;          //录取批次
     private Integer plan;           //招生计划数
-    private Date year;          //招生年份
+    private Integer year;          //招生年份
 
 
 

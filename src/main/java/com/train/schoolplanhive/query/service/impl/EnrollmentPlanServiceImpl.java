@@ -6,6 +6,8 @@ import com.train.schoolplanhive.query.dao.EnrollmentPlanDao;
 import com.train.schoolplanhive.query.model.EnrollPlanStatis;
 import com.train.schoolplanhive.query.model.EnrollmentPlan;
 import com.train.schoolplanhive.query.service.EnrollmentPlanService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import java.util.List;
  */
 @Service
 public class EnrollmentPlanServiceImpl implements EnrollmentPlanService {
+
+    private final Logger logger = LoggerFactory.getLogger(EnrollmentPlanServiceImpl.class);
 
     @Autowired
     private EnrollmentPlanDao enrollmentPlanDao;
@@ -35,10 +39,11 @@ public class EnrollmentPlanServiceImpl implements EnrollmentPlanService {
     @Override
     public PageInfo<EnrollmentPlan> getEnrollmentPlanList(int pageNo, int pageSize, String school, String profess,
                                                           String province) {
-        System.out.println("param:school-profess-province");
-        System.out.println(school);
-        System.out.println(profess);
-        System.out.println(province);
+        // System.out.println("param:school-profess-province");
+        // System.out.println(school);
+        // System.out.println(profess);
+        // System.out.println(province);
+        logger.info("school = {}, profes = {}, province = {}", school, profess, province);
         if(school != null && school.equals("")){
             school = null;
         }

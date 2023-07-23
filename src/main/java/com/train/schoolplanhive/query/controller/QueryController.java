@@ -4,10 +4,11 @@ import com.github.pagehelper.PageInfo;
 import com.train.schoolplanhive.query.model.EnrollPlanStatis;
 import com.train.schoolplanhive.query.model.EnrollmentPlan;
 import com.train.schoolplanhive.query.service.EnrollmentPlanService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +23,7 @@ import java.util.List;
 @Controller
 @RequestMapping("query")
 public class QueryController {
+    private final Logger logger = LoggerFactory.getLogger(QueryController.class);
 
     @Autowired
     private EnrollmentPlanService enrollmentPlanService;
@@ -39,8 +41,11 @@ public class QueryController {
         System.out.println("queryCondition="+enrollmentPlan);
         System.out.println(pageNo);
 
-        if(requery.equals("1")){
-            session.removeAttribute("queryCondition");
+        //if(requery.equals("1")){
+        //    session.removeAttribute("queryCondition");
+        //}
+        if (enrollmentPlan.getSchool() != null) {
+            session.setAttribute("queryCondition", enrollmentPlan);
         }
         EnrollmentPlan queryCondition = (EnrollmentPlan) session.getAttribute("queryCondition");
 
@@ -66,6 +71,7 @@ public class QueryController {
 
         model.addAttribute("pageInfo", pageInfo);
         //session.setAttribute("queryCondition",queryCondition);
+
 
         return "myquery";
     }
