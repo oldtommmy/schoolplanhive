@@ -113,7 +113,7 @@
 
         <div class="navigation-menu-tab">
             <div>
-                <div class="navigation-menu-tab-header" data-toggle="tooltip" title="花木兰" data-placement="right">
+                <div class="navigation-menu-tab-header" data-toggle="tooltip" data-placement="right">
                     <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
                         <figure class="avatar avatar-sm">
                             <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="avatar">
@@ -125,7 +125,7 @@
                                 <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="image">
                             </figure>
                             <h6 class="d-flex align-items-center justify-content-center">
-                                花木兰
+                                <div th:text="${user.username}"></div>
                                 <a href="#" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
                                     <i data-feather="edit-2"></i>
                                 </a>
@@ -134,12 +134,12 @@
                         </div>
                         <div class="dropdown-menu-body">
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item">个人中心</a>
-                                <a href="#" class="list-group-item d-flex">
+                                <a href="query/myquery.html" class="list-group-item">个人中心</a>
+                                <a href="query/myquery.html" class="list-group-item d-flex">
                                     收件箱 <span class="text-muted ml-auto">18</span>
                                 </a>
-                                <a href="#" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
-                                <a href="login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
+                                <a href="query/myquery.html" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
+                                <a href="/user/login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
                             </div>
                         </div>
                     </div>
@@ -148,23 +148,22 @@
             <div class="flex-grow-1">
                 <ul>
                     <li>
-                        <a href="#" data-toggle="tooltip" data-placement="right" title="展示大屏"
+                        <a href="bigscreen/index.html" data-toggle="tooltip" data-placement="right" title="展示大屏"
                            data-nav-target="#bigscreen">
                             <i data-feather="bar-chart-2"></i>
                         </a>
                     </li>
                     <li>
-                        <a  href="#" class="active" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
+                        <a  href="query/myquery.html" class="active" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
                             <i data-feather="home"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-toggle="tooltip" data-placement="right" title="个人中心"
+                        <a href="user/toProfile" data-toggle="tooltip" data-placement="right" title="个人中心"
                            data-nav-target="#mycenter">
                             <i data-feather="layers"></i>
                         </a>
                     </li>
- 
                 </ul>
             </div>
             <div>
@@ -305,7 +304,7 @@
                                 <div>                                  
                                     <ul class="list-inline">
                                         <li class="list-inline-item mb-0">
-                                            <a href="#" class="btn btn-outline-light">
+                                            <a href="query/exportTopnminExcel" class="btn btn-outline-light">
                                                 <i data-feather="plus" class="mr-2"></i>
                                                 导出Excel
                                             </a>

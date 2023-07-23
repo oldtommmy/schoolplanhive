@@ -77,7 +77,7 @@ public interface EnrollmentPlanDao {
      group by major_code  order by  plantotal DESC limit 10";
      */
     @Select({"<script>",
-            "select id,subject,province,school,year, sum(plan) as plan_total ,profess from enrollment_plan " ,
+            "select id,subject,province,school,year,major_code, sum(plan) as plan_total ,profess from enrollment_plan " ,
             "<where>",
             "<if test='school != null'>school = #{school}</if>",
             "<if test='province != null'>and province = #{province}</if>",

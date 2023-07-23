@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,34 +26,42 @@ public class UserController {
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
     @RequestMapping("/update")
-    public void update(String username, String realname, String mobile,
-                        String email, String gender) {
-        User user = new User();
-        user.setUsername(username);
-        user.setRealName(realname);
-        user.setMobile(mobile);
-        user.setEmail(email);
-        user.setGender(gender);
-        userService.update(user);
+    public String update(String username, String realName, String mobile,
+                        String email, String gender, String id, Model model, HttpSession session) {
+        User userById = userService.getUserById(Integer.parseInt(id));
+        userById.setUsername(username);
+        userById.setRealName(realName);
+        userById.setMobile(mobile);
+        userById.setEmail(email);
+        userById.setGender(gender);
+        userService.update(userById);
+        session.removeAttribute("user");
+        session.setAttribute("user", userById);
+        model.addAttribute("user", userById);
+        return "myprofile";
     }
 
     @RequestMapping("/profilemodify.html")
-    public String toModify() {
+    public String toModify(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
         return "profilemodify.html";
     }
 
     @RequestMapping("/toProfile")
-    public String toEditProfile() {
-        return "myprofile.html";
+    public String toEditProfile(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+        return "myprofile";
     }
 
     @RequestMapping("/recover-password.html")
     public String toRecover() {
-        return "/recover-password.html";
+        return "/recover-password";
     }
 
     @RequestMapping("/doRecover")
-    public String doRecover(String emailOrUsername) {
+    public String doRecover(String emailOrUsername, Model model) {
         String result = userService.recoverPwd(emailOrUsername);
         return "/recover-password.html";
     }
@@ -76,6 +85,7 @@ public class UserController {
     public String doLogin(String username,
                           String pwd,
                           HttpSession session,
+                          Model model,
                           HttpServletRequest request){
         LOGGER.info(username +" begin login>>>>>");
         User loginUser = userService.login(username);
@@ -84,6 +94,9 @@ public class UserController {
             return "login";
         }else{
             if(loginUser.getPwd().equals(pwd)){
+                session.setAttribute("user", loginUser);
+                model.addAttribute("user", loginUser);
+                System.out.println(loginUser);
                 return "index";
             }else{
                 session.setAttribute("status", "Error");

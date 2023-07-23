@@ -20,9 +20,12 @@ public interface UserDao {
     @Select("select * from userinfo where email=#{email}")
     public User getUserByEmail(String email);
 
+    @Select("select * from userinfo where id=#{id}")
+    public User getUserById(Integer id);
+
     @Update("update userinfo set username=#{username}, real_name=#{realName}, email=#{email}, " +
             "mobile=#{mobile},gender=#{gender},\n" +
-            "pwd=#{pwd},status=#{status},role=#{role}\n" +
+            "status=#{status}\n" +
             "where id=#{id}")
     public void updateUser(User user);
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class BigScreenController {
     private BigScreenService bigScreenService;
 
     @RequestMapping("index.html")
-    public String showBigScreen(Model model){
+    public String showBigScreen(Model model, HttpSession session){
 
         List<ProfessPlan> professPlanList = bigScreenService.getHotMajors(10);
         List<ProfessPlan> coolProfessPlanList = bigScreenService.getCoolMajors(10);
@@ -104,7 +105,7 @@ public class BigScreenController {
         model.addAttribute("coolmajorNameArr",coolmajorNames.toString());
         model.addAttribute("areaPlanData",areaPlanData.toString());
         model.addAttribute("provincePlanData",provincePlanData);
-
+        model.addAttribute("user", session.getAttribute("user"));
         return "index";
     }
 

@@ -113,7 +113,7 @@
 
         <div class="navigation-menu-tab">
             <div>
-                <div class="navigation-menu-tab-header" data-toggle="tooltip" title="花木兰" data-placement="right">
+                <div class="navigation-menu-tab-header" data-toggle="tooltip"  data-placement="right">
                     <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
                         <figure class="avatar avatar-sm">
                             <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="avatar">
@@ -125,7 +125,7 @@
                                 <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="image">
                             </figure>
                             <h6 class="d-flex align-items-center justify-content-center">
-                                花木兰
+                                <div th:text="${user.username}"></div>
                                 <a href="#" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
                                     <i data-feather="edit-2"></i>
                                 </a>
@@ -134,12 +134,12 @@
                         </div>
                         <div class="dropdown-menu-body">
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item">个人中心</a>
-                                <a href="#" class="list-group-item d-flex">
+                                <a href="query/myquery.html" class="list-group-item">个人中心</a>
+                                <a href="query/myquery.html" class="list-group-item d-flex">
                                     收件箱 <span class="text-muted ml-auto">18</span>
                                 </a>
-                                <a href="#" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
-                                <a href="login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
+                                <a href="query/myquery.html" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
+                                <a href="/user/login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
                             </div>
                         </div>
                     </div>
@@ -148,23 +148,22 @@
             <div class="flex-grow-1">
                 <ul>
                     <li>
-                        <a href="#" data-toggle="tooltip" data-placement="right" title="展示大屏"
+                        <a href="bigscreen/index.html" data-toggle="tooltip" data-placement="right" title="展示大屏"
                            data-nav-target="#bigscreen">
                             <i data-feather="bar-chart-2"></i>
                         </a>
                     </li>
                     <li>
-                        <a  href="#" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
+                        <a  href="query/myquery.html" class="active" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
                             <i data-feather="home"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#"  class="active" data-toggle="tooltip" data-placement="right" title="个人中心"
+                        <a href="user/toProfile" data-toggle="tooltip" data-placement="right" title="个人中心"
                            data-nav-target="#mycenter">
                             <i data-feather="layers"></i>
                         </a>
                     </li>
- 
                 </ul>
             </div>
             <div>
@@ -238,8 +237,8 @@
                 <div  class="open" id="mycenter">
                     <ul>
                         <li class="navigation-divider">个人中心</li>
-                        <li><a href="myprofile.html">我的资料</a></li>
-                        <li><a href="changepwd.html">修改密码</a></li>
+                        <li><a href="user/toProfile">我的资料</a></li>
+                        <li><a href="user/changepwd.html">修改密码</a></li>
                     </ul>
                 </div>
                 <div id="settings">
@@ -286,7 +285,7 @@
                             <figure class="avatar avatar-lg m-b-20">
                                 <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="...">
                             </figure>
-                            <h5 class="mb-1">huamulan</h5>
+                            <h5 class="mb-1" th:text="${user.username}"></h5>
                             <p class="text-muted small">普通用户</p>
                             <a href="user/profilemodify.html" class="btn btn-outline-primary">
                                 <i data-feather="edit-2" class="mr-2"></i> 修改个人信息
@@ -297,19 +296,19 @@
                             <hr class="m-0">                         
                             <div class="row mb-2">
                                 <div class="col-6 text-muted">姓名:</div>
-                                <div class="col-6">花木兰</div>
+                                <div class="col-6" th:text="${user.username}"></div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-6 text-muted">手机号:</div>
-                                <div class="col-6">13888888888</div>
+                                <div class="col-6" th:text="${user.mobile}"></div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-6 text-muted">Email:</div>
-                                <div class="col-6">mulan@qq.com</div>
+                                <div class="col-6" th:text="${user.email}"></div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-6 text-muted">性别:</div>
-                                <div class="col-6">女</div>
+                                <div class="col-6" th:text="${user.gender}"></div>
                             </div>                           
                         </div>
                         

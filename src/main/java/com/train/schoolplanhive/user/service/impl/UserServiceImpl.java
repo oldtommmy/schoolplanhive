@@ -21,6 +21,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(String username) {
+        return userDao.getUser(username);
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userDao.getUserById(id);
+    }
+
+    @Override
     public String recoverPwd(String emailOrUsername) {
         User userByName = userDao.getUser(emailOrUsername);
         User userByEmail = userDao.getUserByEmail(emailOrUsername);
@@ -40,5 +50,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
         userDao.updateUser(user);
+
     }
 }

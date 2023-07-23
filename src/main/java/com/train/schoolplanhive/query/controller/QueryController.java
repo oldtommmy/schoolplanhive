@@ -6,6 +6,7 @@ import com.train.schoolplanhive.query.model.EnrollPlanStatis;
 import com.train.schoolplanhive.query.model.EnrollmentPlan;
 import com.train.schoolplanhive.query.service.AreaPlanService;
 import com.train.schoolplanhive.query.service.EnrollmentPlanService;
+import com.train.schoolplanhive.user.model.User;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -41,9 +42,10 @@ public class QueryController {
     private AreaPlanService areaPlanService;
 
     @RequestMapping("/byarea.html")
-    public String toByArea(Model model) {
+    public String toByArea(Model model, HttpSession session) {
         List<AreaPlan> plan = areaPlanService.getAreaPlan();
         model.addAttribute("areaPlanList", plan);
+        model.addAttribute("user",(User) session.getAttribute("user"));
         return "byarea";
     }
 
@@ -57,6 +59,7 @@ public class QueryController {
         pageInfo = enrollmentPlanService.getEnrollmentPlanGroupBySchool(pageNo, pageSize, queryCondition);
         session.setAttribute("queryCondition", queryCondition);
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("user",(User) session.getAttribute("user"));
         return "myquery";
     }
 
@@ -69,6 +72,7 @@ public class QueryController {
         pageInfo = enrollmentPlanService.getEnrollmentPlanGroupBySubject(pageNo, pageSize, queryCondition);
         session.setAttribute("queryCondition", queryCondition);
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("user",(User) session.getAttribute("user"));
         return "myquery";
     }
 
@@ -81,6 +85,7 @@ public class QueryController {
         pageInfo = enrollmentPlanService.getEnrollmentPlanGroupByProvince(pageNo, pageSize, queryCondition);
         session.setAttribute("queryCondition", queryCondition);
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("user",(User) session.getAttribute("user"));
         return "myquery";
     }
 
@@ -93,6 +98,7 @@ public class QueryController {
                                         Model model, HttpSession session){
 
         PageInfo<EnrollmentPlan> pageInfo = null;
+        model.addAttribute("user",(User) session.getAttribute("user"));
 
         System.out.println("queryCondition="+enrollmentPlan);
         System.out.println(pageNo);
@@ -133,6 +139,72 @@ public class QueryController {
         return "myquery";
     }
 
+    ///导出最冷专业实现
+    @RequestMapping("exportTopnminExcel")
+    public void exportTopnminExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<EnrollPlanStatis> enrollPlanStatisList = enrollmentPlanService.getMajorStatis(null, null, false, 10);
+        HSSFWorkbook wb = new HSSFWorkbook();
+        OutputStream output = response.getOutputStream();
+        int total = enrollPlanStatisList.size();// 获取List集合的size
+        HSSFSheet sheet = wb.createSheet("最热专业表" + (1));
+        HSSFRow row = sheet.createRow(0);
+        // 第一行标题
+        String[] head = new String[]{"专业名称", "专业代码", "专业大类",
+                "招生人数", "招生年份"};
+        int headInt = 0;
+        for (String title : head) {
+            row.createCell(headInt++).setCellValue(title);
+        }
+        int rowInt = 1;
+        for (int m = 0; m < total; m++) {
+            EnrollPlanStatis plan = enrollPlanStatisList.get(m);
+            // 每列对应的字段
+            row = sheet.createRow(rowInt++); // 创建行
+            row.createCell(0).setCellValue(plan.getSubject());
+            row.createCell(1).setCellValue(plan.getProfess());
+            row.createCell(2).setCellValue(plan.getMajorCode());
+            row.createCell(3).setCellValue(plan.getPlanTotal());
+            row.createCell(4).setCellValue(plan.getYear());
+            logger.info("m{}",m);
+        }
+        response.setHeader("Content-Disposition", "attachment;filename=Topnmin.xls");
+        response.setContentType("application/ms-excel");
+        wb.write(output);
+        output.close();
+    }
+    ///导出最专业实现
+    @RequestMapping("exportTopnmaxExcel")
+    public void exportTopnmaxExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<EnrollPlanStatis> enrollPlanStatisList = enrollmentPlanService.getMajorStatis(null, null, true, 10);
+        HSSFWorkbook wb = new HSSFWorkbook();
+        OutputStream output = response.getOutputStream();
+        int total = enrollPlanStatisList.size();// 获取List集合的size
+        HSSFSheet sheet = wb.createSheet("最热专业表" + (1));
+        HSSFRow row = sheet.createRow(0);
+        // 第一行标题
+        String[] head = new String[]{"专业名称", "专业代码", "专业大类",
+                "招生人数", "招生年份"};
+        int headInt = 0;
+        for (String title : head) {
+            row.createCell(headInt++).setCellValue(title);
+        }
+        int rowInt = 1;
+        for (int m = 0; m < total; m++) {
+            EnrollPlanStatis plan = enrollPlanStatisList.get(m);
+            // 每列对应的字段
+            row = sheet.createRow(rowInt++); // 创建行
+            row.createCell(0).setCellValue(plan.getSubject());
+            row.createCell(1).setCellValue(plan.getProfess());
+            row.createCell(2).setCellValue(plan.getMajorCode());
+            row.createCell(3).setCellValue(plan.getPlanTotal());
+            row.createCell(4).setCellValue(plan.getYear());
+            logger.info("m{}",m);
+        }
+        response.setHeader("Content-Disposition", "attachment;filename=Topnmax.xls");
+        response.setContentType("application/ms-excel");
+        wb.write(output);
+        output.close();
+    }
 
 
     @RequestMapping("topnmax-index.html")
@@ -150,12 +222,13 @@ public class QueryController {
         List<EnrollPlanStatis> enrollPlanStatisList = enrollmentPlanService.getMajorStatis(school, province,true,10);
 
         System.out.println(enrollPlanStatisList);
+        model.addAttribute("user",(User) session.getAttribute("user"));
         model.addAttribute("enrollPlanStatisList",enrollPlanStatisList);
         return "topnmax-index";
     }
 
     @RequestMapping("topnmin-index.html")
-    public String topnCoolNQuery(String school,String province,Model model){
+    public String topnCoolNQuery(String school,String province,Model model, HttpSession session){
         System.out.println("to cool top n query>>>>>");
         System.out.println("school=" +school);
         System.out.println("province="+province);
@@ -170,6 +243,7 @@ public class QueryController {
 
         System.out.println(enrollPlanStatisList);
         model.addAttribute("enrollPlanStatisList",enrollPlanStatisList);
+        model.addAttribute("user",(User) session.getAttribute("user"));
 
         return "topnmin-index";
     }
@@ -214,11 +288,49 @@ public class QueryController {
                 index++;
             }
         }
-        response.setHeader("Content-Disposition", "attachment;filename=招生计划总表.xls");
+        response.setHeader("Content-Disposition", "attachment;filename=EnrollmentPlan.xls");
         response.setContentType("application/ms-excel");
         wb.write(output);
         output.close();
     }
 
+    @RequestMapping("exportAreaExcel")
+    public void exportAreaExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<AreaPlan> list = areaPlanService.getAreaPlan();
+        HSSFWorkbook wb = new HSSFWorkbook();
+        OutputStream output = response.getOutputStream();
+        int total = list.size();// 获取List集合的size
+        int mus = 65535;// ：excel表格一个工作表可以存储65536条）
+        int avg = total / mus;
+        for (int i = 0; i < avg + 1; i++) {
+            HSSFSheet sheet = wb.createSheet("招生计划表" + (i + 1));
+            HSSFRow row = sheet.createRow(0);
+            // 第一行标题
+            String[] head = new String[]{"序号", "人数", "区域"};
+            int headInt = 0;
+            for (String title : head) {
+                row.createCell(headInt++).setCellValue(title);
+            }
+            int num = i * mus;
+            int index = 0;
+            int rowInt = 1;
+            for (int m = num; m < list.size(); m++) {
+                if (index == mus) {// 判断index == mus的时候跳出当前for循环
+                    break;
+                }
+                AreaPlan plan = list.get(i);
+                // 每列对应的字段
+                row = sheet.createRow(rowInt++); // 创建行
+                row.createCell(0).setCellValue(plan.getId());
+                row.createCell(1).setCellValue(plan.getPlan());
+                row.createCell(2).setCellValue(plan.getArea());
 
+                index++;
+            }
+        }
+        response.setHeader("Content-Disposition", "attachment;filename=Area_plan.xls");
+        response.setContentType("application/ms-excel");
+        wb.write(output);
+        output.close();
+    }
 }

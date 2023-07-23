@@ -1,10 +1,9 @@
-﻿<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <base th:href="@{/}">
     <title>高校招生计划可视化系统</title>
 
     <!-- Favicon -->
@@ -24,9 +23,11 @@
     <style type="text/css">
         /* 展示大屏布局 */
         #byarea{
-            height:420px;
-           
-            position:relative;
+            height:550px;         
+            width: 720px;
+            top: 38px;
+            left: 430px;
+            position:absolute;
 
         }
         #byprovince{
@@ -40,11 +41,19 @@
         }
 
         #topnmax{
+            margin-top: 30px;
+            position:relative;
+            float: left;
             height:280px;
+            width: 550px;
                      
         }
         #topnmin{
+            float: left;
+            position:relative;
+            margin-top: 30px;
             height:280px;
+            width: 550px;
         }
       </style>
 </head>
@@ -135,7 +144,7 @@
 
         <div class="navigation-menu-tab">
             <div>
-                <div class="navigation-menu-tab-header" data-toggle="tooltip"  data-placement="right">
+                <div class="navigation-menu-tab-header" data-toggle="tooltip" title="花木兰" data-placement="right">
                     <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
                         <figure class="avatar avatar-sm">
                             <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="avatar">
@@ -147,8 +156,8 @@
                                 <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="image">
                             </figure>
                             <h6 class="d-flex align-items-center justify-content-center">
-                                <div th:text="${user.username}"></div>
-                                <a href="user/toProfile" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
+                                花木兰
+                                <a href="#" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
                                     <i data-feather="edit-2"></i>
                                 </a>
                             </h6>
@@ -156,12 +165,12 @@
                         </div>
                         <div class="dropdown-menu-body">
                             <div class="list-group list-group-flush">
-                                <a href="query/myquery.html" class="list-group-item">个人中心</a>
-                                <a href="query/myquery.html" class="list-group-item d-flex">
+                                <a href="#" class="list-group-item">个人中心</a>
+                                <a href="#" class="list-group-item d-flex">
                                     收件箱 <span class="text-muted ml-auto">18</span>
                                 </a>
-                                <a href="query/myquery.html" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
-                                <a href="/user/login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
+                                <a href="#" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
+                                <a href="login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
                             </div>
                         </div>
                     </div>
@@ -170,22 +179,23 @@
             <div class="flex-grow-1">
                 <ul>
                     <li>
-                        <a href="bigscreen/index.html" data-toggle="tooltip" data-placement="right" title="展示大屏"
+                        <a class="active" href="#" data-toggle="tooltip" data-placement="right" title="展示大屏"
                            data-nav-target="#bigscreen">
                             <i data-feather="bar-chart-2"></i>
                         </a>
                     </li>
                     <li>
-                        <a  href="query/myquery.html" class="active" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
+                        <a  href="#" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
                             <i data-feather="home"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="user/toProfile" data-toggle="tooltip" data-placement="right" title="个人中心"
+                        <a href="#" data-toggle="tooltip" data-placement="right" title="个人中心"
                            data-nav-target="#mycenter">
                             <i data-feather="layers"></i>
                         </a>
                     </li>
+ 
                 </ul>
             </div>
             <div>
@@ -196,7 +206,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="user/login.html" data-toggle="tooltip" data-placement="right" title="登出">
+                        <a href="login.html" data-toggle="tooltip" data-placement="right" title="登出">
                             <i data-feather="log-out"></i>
                         </a>
                     </li>
@@ -211,8 +221,8 @@
             <div>
                 <div id="navigation-logo">
                     <a href="index.html">
-                        <img class="logo" src="assets/media/image/logo.png" alt="logo">
-                        <img class="logo-light" src="assets/media/image/logo-light.png" alt="light logo">
+                         <img class="logo" src="assets/media/image/logo.png" alt="logo">
+                        <img class="logo-light" src="assets/media/image/logo-light.png" alt="light logo"> -->
                     </a>
                 </div>
             </div>
@@ -223,31 +233,34 @@
                 <div class="open" id="bigscreen">
                     <ul>
                         <li class="navigation-divider">展示大屏</li>                   
-                        <li><a class="active" href="bigscreen/index.html">综合展示大屏</a></li>
-                        
+                        <li><a  href="index.html">综合展示大屏</a></li>
+                        <li><a class="active" href="chinaEcharts.html">新大屏</a></li>
                     </ul>
                 </div>
                 <div id="myquery">
                     <ul>
                         <li class="navigation-divider">分析查询</li>
                         <li>
-                            <a href="query/myquery.html">
+                            <a href="myquery.html">
                                 <span>综合查询</span>
+                               
                             </a>
                         </li>
                         <li>
-                            <a href="query/topnmax-index.html">
+                            <a href="topnmax-index.html">
                                 <span>热门专业</span>
+                               
                             </a>
                         </li>
                         <li>
-                            <a href="query/topnmin-index.html">
+                            <a href="topnmin-index.html">
                                 <span>冷门专业</span>
                             </a>
                         </li>
                         <li>
-                            <a href="query/byarea.html">
+                            <a href="byarea.html">
                                 <span>区域统计</span>
+                                
                             </a>
                         </li>
                     </ul>
@@ -292,7 +305,6 @@
         </div>
         <!-- end::page-header -->
 
-
         <!-- begin::page content -->
         <div class="container-fluid">
 
@@ -305,22 +317,21 @@
                             <div class="row">
 
                                 <div id="big_screen_container">
-                                      <!-- 各省招生计划-->
-                                    <div id='byprovince'></div>          
-                                    
-                                    <!-- 热门专业Top10-->
+                                    <div>
+                                          <!-- 各省招生计划-->
+                                        <div id='byprovince'  ></div>  
+                                        <!--学生来源展示-->
+                                        <div id='byarea' ></div> 
+                                    </div>
+                                    <div style="display: flex; "> 
+                                        <!-- 热门专业Top10-->
                                         
-                                    <div id='topnmax'></div>
-                                       
-                                         <!-- 冷门专业Top10-->                                      
-                                    <div id='topnmin'></div> 
-                                       
-                                   
-                                      <!--学生来源展示-->
-                                    <div id='byarea' ></div>
-
-
-
+                                        <div id='topnmax' style="flex: 50%;  "></div>
+                                        
+                                        <!-- 冷门专业Top10-->                                      
+                                        <div id='topnmin' style="flex: 50%;  "></div> 
+                                    </div> 
+                             
                                 </div>
                              
                             </div> 
@@ -332,11 +343,8 @@
                 </div>
             </div>
 
-            <span id="areaPlanData" th:text="${areaPlanData}" style="display: none"></span>
-            <script>
-                var areaPlanData = $("#areaPlanData")
-                console.log(areaPlanData)
-            </script>
+            
+
         </div>
         <!-- end::page content -->
 
@@ -404,15 +412,12 @@
     <div class="bg-warning-bright"></div>
 </div>
 
-
 <!-- App scripts -->
 <script src="assets/js/app.js"></script>
 <!-- echarts script begin-->
 <script src="echarts/dist/echarts.min.js"></script>
 <script src="echarts/theme/china.js"></script>
 <script src="echarts/theme/mytheme.js"></script>
-
-<script src="assets/js/jquery.js"></script>
 
 <!-- echarts script end-->
 
@@ -425,17 +430,32 @@
          title: {
              text: '学生来源分析',
              subtext: '2016年招生计划',
-             left: 'center'
+            //  left: 'center'
+            textStyle: {  
+                color: '#E53A40',  
+                fontStyle: 'italic',  
+                fontWeight: 'bold',  
+                fontFamily: 'Microsoft YaHei',  
+                fontSize: 20,  
+            },  
+            left: 'right',  
+            top: 10,  
+            width: 180,  
+            height: 30,  
+            textAlign: 'center',  
+            zlevel: 1,  
+            z: 2,
          },
         tooltip: {
             trigger: 'item',
             formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
         legend: {
-            left: 'center',
+            left: 'right',
             top: 'bottom',
             data: ['东北', '华东', '华中', '华北', '华南', '西北', '西南']
         },
+         
         toolbox: {
             show: true,
             feature: {
@@ -453,17 +473,26 @@
                 name: '学生来源',
                 type: 'pie',
                 radius: [10, 100],
-                center: ['50%', '40%'],
+                center: ['75%', '50%'],
                 roseType: 'area',
-               // data: "${areaPlanData}"
+                data: [
+                    {value: 297541, name: '东北'},
+                    {value: 1292768, name: '华东'},
+                    {value: 687938, name: '华中'},
+                    {value: 514528, name: '华北'},
+                    {value: 534479, name: '华南'},
+                    {value: 363941, name: '西北'},
+                    {value: 637507, name: '西南'}
+                    
+                ]
             }
         ]
     };
-
+    ;
     if (option && typeof option === "object") {
         areaChart.setOption(option, true);
     }
-</script>
+           </script>
 
 <!--地图方式显示各省招生数据-->
 <script type="text/javascript">
@@ -542,8 +571,20 @@ return res;
 optionProvince = {
  title: {
      text: name_title,
- 
-     x: 'center'
+     textStyle: {  
+            color: '#E53A40',  
+            fontStyle: 'italic',  
+            fontWeight: 'bold',  
+            fontFamily: 'Microsoft YaHei',  
+            fontSize: 20,  
+        },  
+        left: 'center',  
+        top: 10,  
+        width: 200,  
+        height: 30,  
+        textAlign: 'center',  
+        zlevel: 1,  
+        z: 2,
  },
 //tooltip，提示框显示内容
 tooltip: {
@@ -553,15 +594,10 @@ tooltip: {
             var toolTiphtml = ''
             for(var i = 0;i<data.length;i++){
                 if(params.name==data[i].name){
-                    
-                   
                         toolTiphtml+=data[i].name+':'+data[i].value+"<br>"
-                    
                 }
             }
-
             return toolTiphtml;
-        
     }
 },
 //visualMap，视觉组件
@@ -580,12 +616,13 @@ visualMap: {
         // color: ['#3C3B3F', '#605C3C'] // 黑绿
         // color: ['#0f0c29', '#302b63', '#24243e'] // 黑紫黑
         // color: ['#23074d', '#cc5333'] // 紫红
-        color: ['#00467F', '#A5CC82'] // 蓝绿
+        // color: ['#00467F', '#A5CC82'] // 蓝绿
         // color: ['#1488CC', '#2B32B2'] // 浅蓝
         // color: ['#00467F', '#A5CC82'] // 蓝绿
         // color: ['#00467F', '#A5CC82'] // 蓝绿
         // color: ['#00467F', '#A5CC82'] // 蓝绿
         // color: ['#00467F', '#A5CC82'] // 蓝绿
+        color: ['#c9d6de','#263959']
 
     }
 },
@@ -632,7 +669,7 @@ series: [{//显示地图上各个省份坐标点，坐标点大小与招生人�
         },
         itemStyle: {
             normal: {
-                color: '#05C3F9'
+                color: '#a3daff',//'red'
             }
         }
     },
@@ -673,7 +710,7 @@ series: [{//显示地图上各个省份坐标点，坐标点大小与招生人�
         symbol: 'pin', //气泡
         symbolSize: function(val) {
            //将数据缩小，但保证最小气泡至少为20
-            return val[2]/10000 + 20;
+            return val[2]/30000 + 20;
         },
         label: {
             normal: {
@@ -687,7 +724,7 @@ series: [{//显示地图上各个省份坐标点，坐标点大小与招生人�
         },
         itemStyle: {
             normal: {
-                color: '#F62157', //标志颜色
+                color: '#F62157', //标志颜色red
             }
         },
         zlevel: 6,
@@ -718,9 +755,9 @@ series: [{//显示地图上各个省份坐标点，坐标点大小与招生人�
         },
         itemStyle: {
             normal: {
-                color: 'yellow',
-                shadowBlur: 10,
-                shadowColor: 'yellow'
+                color: '#0080ff',//'red',
+                shadowBlur: 5,
+                shadowColor: '#0080ff'//'red'
             }
         },
         zlevel: 1
@@ -741,7 +778,20 @@ provinceChart.setOption(optionProvince);
     option = null;
     option = {
        title: [{
-       left: 'center',
+        textStyle: {  
+            color: '#E53A40',  
+            fontStyle: 'italic',  
+            fontWeight: 'bold',  
+            fontFamily: 'Microsoft YaHei',  
+            fontSize: 20,  
+        },  
+        left: 'center',  
+        top: 10,  
+        width: 200,  
+        height: 30,  
+        textAlign: 'center',  
+        zlevel: 1,  
+        z: 2,
        text: '招生最多的专业top 10'
    }],
       grid: {
@@ -787,6 +837,9 @@ provinceChart.setOption(optionProvince);
             show: true,
             position: "right",
           },
+          itemStyle: {
+            color:'#4ea1d3'
+          }
         },
       ],
     };
@@ -803,7 +856,20 @@ provinceChart.setOption(optionProvince);
     option = null;
     option = {
        title: [{
-       left: 'center',
+        textStyle: {  
+            color: '#E53A40',  
+            fontStyle: 'italic',  
+            fontWeight: 'bold',  
+            fontFamily: 'Microsoft YaHei',  
+            fontSize: 20,  
+        },  
+        left: 'center',  
+        top: 10,  
+        width: 200,  
+        height: 30,  
+        textAlign: 'center',  
+        zlevel: 1,  
+        z: 2,
        text: '招生最少的专业top 10'
    }],
       grid: {
@@ -829,6 +895,7 @@ provinceChart.setOption(optionProvince);
       },
       xAxis: {
         type: "value",
+        minInterval:1
       },
       series: [
         {
