@@ -285,35 +285,34 @@
                             <figure class="avatar avatar-lg m-b-20">
                                 <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="...">
                             </figure>
-                            <h5 class="mb-1">huamulan</h5>
-                            <p class="text-muted small">普通用户</p>
+                            <h5 class="mb-1" th:text="${user.username}"></h5>
 
                             <h6 class="card-title d-flex justify-content-between align-items-center">
                                 修改密码
                             </h6>
                                
                             
-                            <form>
+                            <form action="user/changePwd" method="post">
                                 <div class="form-group row">
-                                  <label for="oldpwd" class="col-sm-3 col-form-label">旧密码:</label>
+                                  <label for="oldpwd" class="col-sm-3 col-form-label" >旧密码:</label>
                                   <div class="col-sm-9">
-                                    <input type="password"  class="form-control" id="oldpwd" placeholder="请输入旧密码">
+                                    <input type="password"  class="form-control" id="oldpwd" name="oldpwd" placeholder="请输入旧密码">
                                   </div>
                                 </div>
                                 <div class="form-group row">
                                   <label for="pwd" class="col-sm-3 col-form-label">新密码：</label>
                                   <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="pwd" placeholder="请输入新密码">
+                                    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="请输入新密码">
                                   </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="repwd" class="col-sm-3 col-form-label">再次输入：</label>
                                     <div class="col-sm-9">
-                                      <input type="password" class="form-control" id="repwd" placeholder="请再次输入新密码">
+                                      <input type="password" class="form-control" id="repwd" name="repwd" placeholder="请再次输入新密码">
                                     </div>
                                 </div>                      
                                    
-                                <button class="btn btn-outline-primary">
+                                <button class="btn btn-outline-primary" type="submit">
                                     <i data-feather="edit-2" class="mr-2"></i>确认
                                 </button>
                                                                                                 

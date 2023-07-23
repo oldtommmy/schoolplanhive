@@ -24,27 +24,37 @@
     <style type="text/css">
         /* 展示大屏布局 */
         #byarea{
-            height:420px;
-           
-            position:relative;
+            height:550px;
+            width: 720px;
+            top: 38px;
+            left: 600px;
+            position:absolute;
 
         }
         #byprovince{
             position:relative;
-            height:550px;         
+            height:550px;
             width: 720px;
             top: 10px;
             left: 50px;
-           
+
 
         }
 
         #topnmax{
+            margin-top: 30px;
+            position:relative;
+            float: left;
             height:280px;
-                     
+            width: 550px;
+
         }
         #topnmin{
+            float: left;
+            position:relative;
+            margin-top: 30px;
             height:280px;
+            width: 550px;
         }
       </style>
 </head>
@@ -455,7 +465,15 @@
                 radius: [10, 100],
                 center: ['50%', '40%'],
                 roseType: 'area',
-               // data: "${areaPlanData}"
+                data: [
+                    {value: 297541, name: '东北'},
+                    {value: 1292768, name: '华东'},
+                    {value: 687938, name: '华中'},
+                    {value: 514528, name: '华北'},
+                    {value: 534479, name: '华南'},
+                    {value: 363941, name: '西北'},
+                    {value: 637507, name: '西南'}
+                ]
             }
         ]
     };
@@ -580,7 +598,7 @@ visualMap: {
         // color: ['#3C3B3F', '#605C3C'] // 黑绿
         // color: ['#0f0c29', '#302b63', '#24243e'] // 黑紫黑
         // color: ['#23074d', '#cc5333'] // 紫红
-        color: ['#00467F', '#A5CC82'] // 蓝绿
+        color: ['#c9d6de','#263959']
         // color: ['#1488CC', '#2B32B2'] // 浅蓝
         // color: ['#00467F', '#A5CC82'] // 蓝绿
         // color: ['#00467F', '#A5CC82'] // 蓝绿
@@ -632,7 +650,7 @@ series: [{//显示地图上各个省份坐标点，坐标点大小与招生人�
         },
         itemStyle: {
             normal: {
-                color: '#05C3F9'
+                color: '#a3daff',//'red'
             }
         }
     },
@@ -718,9 +736,9 @@ series: [{//显示地图上各个省份坐标点，坐标点大小与招生人�
         },
         itemStyle: {
             normal: {
-                color: 'yellow',
-                shadowBlur: 10,
-                shadowColor: 'yellow'
+                color: '#0080ff',//'red',
+                shadowBlur: 5,
+                shadowColor: '#0080ff'//'red'
             }
         },
         zlevel: 1
@@ -753,16 +771,16 @@ provinceChart.setOption(optionProvince);
       yAxis: {
         type: "category",
         data: [
-          "国际经济与贸易",
-          "护理",
-          "法学",
-          "电气工程及其自动化",
-          "财务管理",
+          "临床医学",
           "土木工程",
-          "计算机科学与技术",
-          "会计(会计电算化)",
-          "英语",
+          "国际经济和贸易",
+          "工程造价",
+          "物流管理",
+          "电子商务",
+          "会计",
           "会计学",
+          "市场营销",
+          "财务管理",
         ],
       },
       xAxis: {
@@ -771,16 +789,16 @@ provinceChart.setOption(optionProvince);
       series: [
         {
           data: [
-            54814,
-            57507,
-            59041,
-            61506,
-            64951,
-            66319,
-            66463,
-            78128,
-            82535,
-            86568,
+            57552,
+            60470,
+            60552,
+            61419,
+            61863,
+            65346,
+            71500,
+            72757,
+            72768,
+            75832,
           ],
           type: "bar",
           label: {

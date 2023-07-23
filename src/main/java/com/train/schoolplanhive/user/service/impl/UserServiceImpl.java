@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updatePwd(User user) {
+        userDao.updatePwd(user);
+    }
+
+    @Override
     public void update(User user) {
         userDao.updateUser(user);
 

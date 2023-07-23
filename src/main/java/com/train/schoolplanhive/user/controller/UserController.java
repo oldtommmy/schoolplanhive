@@ -105,4 +105,24 @@ public class UserController {
             }
         }
     }
+
+    @RequestMapping ("changepwd.html")
+    public String toChangePwd(Model model, HttpSession session) {
+        model.addAttribute(session.getAttribute("user"));
+        return "changepwd";
+    }
+
+    @RequestMapping("changePwd")
+    public String changePwd(Model model, HttpSession session, String oldpwd, String pwd, String repwd) {
+        model.addAttribute(session.getAttribute("user"));
+        User user = userService.getUserById(((User) session.getAttribute("user")).getId());
+        if (user.getPwd().equals(oldpwd)) {
+            if (pwd.equals(repwd)) {
+                user.setPwd(pwd);
+                userService.updatePwd(user);
+                return "myprofile";
+            }
+        }
+        return "changepwd";
+    }
 }

@@ -17,5 +17,7 @@ public interface UserService {
 
     public String recoverPwd(String emailOrUsername);
 
+    public void updatePwd(User user);
+
     public void update(User user);
 }

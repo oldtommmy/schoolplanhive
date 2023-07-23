@@ -28,4 +28,8 @@ public interface UserDao {
             "status=#{status}\n" +
             "where id=#{id}")
     public void updateUser(User user);
+
+    @Update("update userinfo set pwd=#{pwd}" +
+            "where id=#{id}")
+    public void updatePwd(User user);
 }
