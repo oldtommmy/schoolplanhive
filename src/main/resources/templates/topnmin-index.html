@@ -288,16 +288,16 @@
                                     <form>
                                         <div class="form-row">
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="学校名称">
+                                                <input type="text" name="school" class="form-control" placeholder="学校名称">
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="省份">
+                                                <input type="text" name="province" class="form-control" placeholder="省份">
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="招生年份">
+                                                <input type="number" name="year" class="form-control" placeholder="招生年份">
                                             </div>
                                             <div class="col">
-                                                <button type="button" class="btn btn-secondary"><i data-feather="search"></i>&nbsp;查询</button>
+                                                <button type="submit" class="btn btn-secondary"><i data-feather="search"></i>&nbsp;查询</button>
                                             </div>
                                         </div>
                                     </form>
@@ -332,53 +332,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1000 </th>
-                                                <td>土木工程</td>
-                                                <td> 1072</td>
-                                                <td>清华大学</td>
-                                                <td>吉林</td>                                                                                         
-                                                <td>9</td>
-                                                <td>2016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1002 </th>
-                                                <td>基础数学</td>
-                                                <td> 14102</td>
-                                                <td>北京大学</td>
-                                                <td>吉林</td>
-                                                <td>6</td>
-                                                <td>2016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1003 </th>
-                                                <td>软件工程</td>
-                                                <td> 1202</td>
-                                                <td>南京大学</td>
-                                                <td>吉林</td>    
-                                                <td>3</td>
-                                                <td>2016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1004 </th>
-                                                <td>建筑工程</td>
-                                                <td> 1112</td>
-                                                <td>吉林大学</td>
-                                                <td>吉林</td>
-                                                <td>7</td>
-                                                <td>2016</td>  
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1005 </th>
-                                                <td>机电工程</td>
-                                                <td> 1002</td>
-                                                <td>深圳大学</td>
-                                                <td>吉林</td>
-                                                <td>9</td>
-                                                <td>2016</td>
-                                                
-                                            </tr>
-
+                                            <div th:each="item:${enrollPlanStatisList}">
+                                                <tr>
+                                                    <th scope="row" th:text="${item.id}"></th>
+                                                    <td th:text="${item.subject}"></td>
+                                                    <td th:text="${item.profess}"></td>
+                                                    <td th:text="${item.school}"></td>
+                                                    <td th:text="${item.province}"></td>
+                                                    <td th:text="${item.planTotal}"></td>
+                                                </tr>
+                                            </div>
                                         </tbody>
                                         </table>
 

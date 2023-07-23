@@ -212,13 +212,11 @@
                         <li>
                             <a href="/query/myquery.html">
                                 <span>综合查询</span>
-                               
                             </a>
                         </li>
                         <li>
                             <a href="/query/topnmax-index.html">
                                 <span>热门专业</span>
-                               
                             </a>
                         </li>
                         <li>
@@ -229,7 +227,6 @@
                         <li>
                             <a href="/query/byarea.html">
                                 <span>区域统计</span>
-                                
                             </a>
                         </li>
                     </ul>
@@ -319,40 +316,16 @@
                                             </th>
                                             <th scope="col">区域</th>
                                             <th scope="col">招生人数</th>
-                                            <th scope="col">招生年份</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <div th:each="item:${areaPlanList}">
                                             <tr>
-                                                <th scope="row">1000 </th>
-                                                <td>华东</td>                                                                                        
-                                                <td>45669</td>
-                                                <td>2016</td>
+                                                <th scope="row" th:text="${item.id}"> </th>
+                                                <td th:text="${item.area}"></td>
+                                                <td th:text="${item.plan}"></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">1002 </th>
-                                                <td>华北</td>
-                                                <td>59886</td>
-                                                <td>2016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1003 </th>
-                                                <td>华南</td>  
-                                                <td>30211</td>
-                                                <td>2016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1004 </th>
-                                                <td>华中</td>
-                                                <td>15667</td>
-                                                <td>2016</td>  
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1005 </th>
-                                                <td>东北</td>
-                                                <td>25559</td>
-                                                <td>2016</td>                                              
-                                            </tr>
+                                        </div>
                                         </tbody>
                                         </table>
                                      </div>

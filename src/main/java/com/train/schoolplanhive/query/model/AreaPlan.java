@@ -14,5 +14,4 @@ public class AreaPlan {
     private Integer plan;   //招生计划
     private String area;    //招生区域
 
-
 }

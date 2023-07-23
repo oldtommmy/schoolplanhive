@@ -14,10 +14,16 @@ import java.util.List;
  */
 public interface EnrollmentPlanService {
 
+    public List<EnrollmentPlan> getAllPlanList();
     public PageInfo<EnrollmentPlan> getEnrollmentPlanList(int pageNo, int pageSize);
     public PageInfo<EnrollmentPlan> getEnrollmentPlanList(int pageNo,int PageSize,String school,
-                                                          String profess,String province);
+                                                          String subject,String province);
     public PageInfo<EnrollmentPlan> getEnrollmentPlanList(int pageNo,int PageSize,EnrollmentPlan queryCondition);
+
+
+    public PageInfo<EnrollmentPlan> getEnrollmentPlanGroupBySchool(int pageNo,int PageSize,EnrollmentPlan queryCondition);
+    public PageInfo<EnrollmentPlan> getEnrollmentPlanGroupBySubject(int pageNo,int PageSize,EnrollmentPlan queryCondition);
+    public PageInfo<EnrollmentPlan> getEnrollmentPlanGroupByProvince(int pageNo,int PageSize,EnrollmentPlan queryCondition);
 
     /**
      *

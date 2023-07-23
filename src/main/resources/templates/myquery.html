@@ -147,18 +147,18 @@
             <div class="flex-grow-1">
                 <ul>
                     <li>
-                        <a href="#" data-toggle="tooltip" data-placement="right" title="展示大屏"
+                        <a href="" data-toggle="tooltip" data-placement="right" title="展示大屏"
                            data-nav-target="#bigscreen">
                             <i data-feather="bar-chart-2"></i>
                         </a>
                     </li>
                     <li>
-                        <a  href="#" class="active" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
+                        <a  href="" class="active" data-toggle="tooltip" data-placement="right" title="分析查询" data-nav-target="#myquery">
                             <i data-feather="home"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-toggle="tooltip" data-placement="right" title="个人中心"
+                        <a href="" data-toggle="tooltip" data-placement="right" title="个人中心"
                            data-nav-target="#mycenter">
                             <i data-feather="layers"></i>
                         </a>
@@ -285,7 +285,7 @@
                                                 <input type="text" name="school" class="form-control" placeholder="学校名称">
                                             </div>
                                             <div class="col">
-                                                <input type="text" name="profess" class="form-control" placeholder="专业名称">
+                                                <input type="text" name="subject" class="form-control" placeholder="专业名称">
                                             </div>
                                             <div class="col">
                                                 <input type="text" name="province" class="form-control" placeholder="省份">
@@ -303,7 +303,7 @@
                                 <div>                                  
                                     <ul class="list-inline">
                                         <li class="list-inline-item mb-0">
-                                            <a href="#" class="btn btn-outline-light">
+                                            <a href="query/exportEnrollmentPlanExcel" class="btn btn-outline-light">
                                                 <i data-feather="plus" class="mr-2"></i>
                                                 导出Excel
                                             </a>
@@ -314,9 +314,9 @@
                                                 排序
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">学校名称</a>
-                                                <a class="dropdown-item" href="#">专业名称</a>
-                                                <a class="dropdown-item" href="#">招生年份</a>
+                                                <a class="dropdown-item" href="query/groupbyschool">学校名称</a>
+                                                <a class="dropdown-item" href="query/groupbysubject">专业名称</a>
+                                                <a class="dropdown-item" href="query/groupbyprovince">招生省份</a>
                                             </div>
                                         </li>
 
@@ -347,9 +347,9 @@
                                                     <th scope="row" th:text="${item.id}"></th>
                                                     <td th:text="${item.school}"></td>
                                                     <td th:text="${item.province}"></td>
+                                                    <td th:text="${item.subject}"></td>
                                                     <td th:text="${item.profess}"></td>
                                                     <td th:text="${item.majorCode}"></td>
-                                                    <td th:text="${item.subject}"></td>
                                                     <td th:text="${item.batch}"></td>
                                                     <td th:text="${item.plan}"></td>
                                                     <td th:text="${item.year}"></td>

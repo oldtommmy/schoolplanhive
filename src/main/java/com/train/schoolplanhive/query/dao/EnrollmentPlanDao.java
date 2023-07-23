@@ -26,34 +26,68 @@ public interface EnrollmentPlanDao {
             "select * from enrollment_plan",
             "<where>",
             "<if test='school != null'>school like #{school}</if>",
-            "<if test='profess != null'>and profess like #{profess}</if>",
+            "<if test='subject != null'>and subject like #{subject}</if>",
             "<if test='province != null'>and province like #{province}</if>",
             "</where>",
             "</script>"
 
     })
-    public List<EnrollmentPlan> getEnrollmentPlans(String school,String profess,String province);
+    public List<EnrollmentPlan> getEnrollmentPlans(String school,String subject,String province);
+
+    @Select({"<script>",
+            "select * from enrollment_plan",
+            "<where>",
+            "<if test='school != null'>school like #{school}</if>",
+            "<if test='subject != null'>and subject like #{subject}</if>",
+            "<if test='province != null'>and province like #{province}</if>",
+            "</where>",
+            "ORDER BY convert(school USING gbk) COLLATE gbk_chinese_ci ASC",  // 添加按学校排序
+            "</script>"
+    })
+    public List<EnrollmentPlan> getEnrollmentPlansGroupBySchool(String school,String subject,String province);
+
+    @Select({"<script>",
+            "select * from enrollment_plan",
+            "<where>",
+            "<if test='school != null'>school like #{school}</if>",
+            "<if test='subject != null'>and subject like #{subject}</if>",
+            "<if test='province != null'>and province like #{province}</if>",
+            "</where>",
+            "ORDER BY convert(subject USING gbk) COLLATE gbk_chinese_ci ASC",  // 添加按专业排序
+            "</script>"
+    })
+    public List<EnrollmentPlan> getEnrollmentPlansGroupBySubject(String school,String subject,String province);
+
+
+    @Select({"<script>",
+            "select * from enrollment_plan",
+            "<where>",
+            "<if test='school != null'>school like #{school}</if>",
+            "<if test='subject != null'>and subject like #{subject}</if>",
+            "<if test='province != null'>and province like #{province}</if>",
+            "</where>",
+            "ORDER BY convert(province USING gbk) COLLATE gbk_chinese_ci ASC",  // 添加按省份排序
+            "</script>"
+    })
+    public List<EnrollmentPlan> getEnrollmentPlansGroupByProvince(String school,String subject,String province);
 
     /**
      *  热门专业&冷门专业sql
      "select profess,sum(plan) as plantotal,school  from enrollment_plan ep
      group by major_code  order by  plantotal DESC limit 10";
      */
-
-
-
     @Select({"<script>",
-            "select profess, sum(plan) as plan_total ,major_code from enrollment_plan " ,
+            "select id,subject,province,school,year, sum(plan) as plan_total ,profess from enrollment_plan " ,
             "<where>",
             "<if test='school != null'>school = #{school}</if>",
             "<if test='province != null'>and province = #{province}</if>",
             "</where>",
-            "group by major_code order by plan_total ",
+            "group by subject order by plan_total ",
             "<if test='desc != null'>desc</if>",
             "<if test='desc == null'>asc</if>",
             "limit #{topn}",
-    "</script>"
+            "</script>"
     })
     public List<EnrollPlanStatis> getTopNEnrollmentPlans(String school, String province, String desc, int topn);
-
 }
+
