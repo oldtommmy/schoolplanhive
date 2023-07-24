@@ -426,7 +426,16 @@
 
 <!-- echarts script end-->
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+    const areaPlanDataList = [[${areaPlanList}]];
+    const areaDataList = [];
+    for (let i = 0; i < areaPlanDataList.length; i++) {
+        const tmp = new Object();
+        tmp.name = areaPlanDataList[i].area;
+        tmp.value = areaPlanDataList[i].plan;
+        areaDataList.push(tmp);
+    }
+    console.log(areaPlanDataList);
     var area_dom = document.getElementById("byarea");
     var areaChart = echarts.init(area_dom);
     var app = {};
@@ -465,15 +474,7 @@
                 radius: [10, 100],
                 center: ['50%', '40%'],
                 roseType: 'area',
-                data: [
-                    {value: 297541, name: '东北'},
-                    {value: 1292768, name: '华东'},
-                    {value: 687938, name: '华中'},
-                    {value: 514528, name: '华北'},
-                    {value: 534479, name: '华南'},
-                    {value: 363941, name: '西北'},
-                    {value: 637507, name: '西南'}
-                ]
+                data:areaDataList
             }
         ]
     };
@@ -484,47 +485,27 @@
 </script>
 
 <!--地图方式显示各省招生数据-->
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 var dombyprovince = document.getElementById("byprovince");
 var provinceChart = echarts.init(dombyprovince);
 
 var name_title = "全国高校2016年各省市计划招生人数"
 // 使用中国地图
 var mapName = 'china'
-//要在地图上展示的数据
-var data = [
-{name:"北京",value:35215},
-{name:"天津",value:42196},
-{name:"河北",value:182752},
-{name:"山西",value:152778},
-{name:"内蒙古",value:101587},
-{name:"辽宁",value:103951},
-{name:"吉林",value:84272},
-{name:"黑龙江",value:109318},
-{name:"上海",value:16676},
-{name:"江苏",value:195147},
-{name:"浙江",value:204328},
-{name:"安徽",value:359881},
-{name:"福建",value:107600},
-{name:"江西",value:99041},
-{name:"山东",value:310095},
-{name:"河南",value:307224},
-{name:"湖北",value:205796},
-{name:"湖南",value:174918},
-{name:"重庆",value:105275},
-{name:"四川",value:260928},
-{name:"贵州",value:163191},
-{name:"云南",value:108113},
-{name:"西藏",value:0},
-{name:"陕西",value:150579},
-{name:"甘肃",value:106798},
-{name:"青海",value:19532},
-{name:"宁夏",value:40113},
-{name:"新疆",value:46919},
-{name:"广东",value:345315},
-{name:"广西",value:152496},
-{name:"海南",value:36668}
-];
+
+const provincePlans = [[${provincePlans}]];
+const mapDataList = [];
+for (let i = 0; i < provincePlans.length; i++) {
+    const tmp1 = new Object();
+    tmp1.name = provincePlans[i].province;
+    tmp1.value = provincePlans[i].plan;
+    mapDataList.push(tmp1);
+}
+console.log(provincePlans);
+
+console.log(mapDataList);
+
+var data = mapDataList
 
 var geoCoordMap = {};
 
@@ -682,7 +663,7 @@ series: [{//显示地图上各个省份坐标点，坐标点大小与招生人�
             }
         },
         animation: false,//是否开启动画
-        data: data
+        data: mapDataList
     },
     {//以气泡的形式显示各省招生计划的值
         name: '点',
@@ -749,18 +730,38 @@ series: [{//显示地图上各个省份坐标点，坐标点大小与招生人�
 provinceChart.setOption(optionProvince);
        </script>
 
-<!-- 热门专业显示 -->
+<!-- 冷门专业显示 -->
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
     var dom_topn_max = document.getElementById("topnmax");
     //var topNMaxChart = echarts.init(dom_topn_max,"mytheme");
     var topNMaxChart = echarts.init(dom_topn_max);
     var app = {};
+
+    const hotplan = [[${hotPlan}]];
+    console.log(hotplan)
+    const hotplanlist1 = [];
+    const hotplanlist2 = [];
+    for (let i = 0; i < hotplan.length; i++) {
+        const tmp1 = new Object();
+        tmp1.name = hotplan[i].subject;
+        tmp1.value = hotplan[i].planTotal;
+        hotplanlist1.push(tmp1.name);
+        hotplanlist2.push(tmp1.value);
+    }
+    console.log(hotplanlist1);
+
+    console.log(hotplanlist2);
+
+
+
+
     option = null;
     option = {
        title: [{
        left: 'center',
-       text: '招生最多的专业top 10'
+       text: '招生最少的专业 Top 10',
+       color: ['#c23531','#2f4554', '#61a0a8']
    }],
       grid: {
         left: "3%",
@@ -770,41 +771,29 @@ provinceChart.setOption(optionProvince);
       },
       yAxis: {
         type: "category",
-        data: [
-          "临床医学",
-          "土木工程",
-          "国际经济和贸易",
-          "工程造价",
-          "物流管理",
-          "电子商务",
-          "会计",
-          "会计学",
-          "市场营销",
-          "财务管理",
-        ],
+        data: hotplanlist1
       },
       xAxis: {
         type: "value",
       },
       series: [
         {
-          data: [
-            57552,
-            60470,
-            60552,
-            61419,
-            61863,
-            65346,
-            71500,
-            72757,
-            72768,
-            75832,
-          ],
+          data: hotplanlist2,
           type: "bar",
           label: {
             show: true,
             position: "right",
           },
+            itemStyle: {
+                normal: {
+                    //这里是重点
+                    color: function(params) {
+                        //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                        var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83', '#ca8622','#c23531','#2f4554', '#61a0a8', '#d48265'];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
         },
       ],
     };
@@ -812,17 +801,31 @@ provinceChart.setOption(optionProvince);
         topNMaxChart.setOption(option, true);
     }
   </script>
-<!-- 冷门专业显示 -->
-<script type="text/javascript">
+<!-- 热门专业显示 -->
+<script type="text/javascript" th:inline="javascript">
     var dom_topn_min = document.getElementById("topnmin");
     //var topn_min_Chart = echarts.init(dom_topn_min,'mytheme');
     var topn_min_Chart = echarts.init(dom_topn_min);
     var app = {};
+
+    const coolplan = [[${coolPlan}]];
+    console.log("coolpan" + coolplan)
+    const coolplanlist1 = [];
+    const coolplanlist2 = [];
+    for (let i = 0; i < hotplan.length; i++) {
+        const tmp1 = new Object();
+        tmp1.name = coolplan[i].subject;
+        tmp1.value = coolplan[i].planTotal;
+        coolplanlist1.push(tmp1.name);
+        coolplanlist2.push(tmp1.value);
+    }
+
+
     option = null;
     option = {
        title: [{
        left: 'center',
-       text: '招生最少的专业top 10'
+       text: '招生最多的专业 Top 10'
    }],
       grid: {
         left: "3%",
@@ -832,41 +835,29 @@ provinceChart.setOption(optionProvince);
       },
       yAxis: {
         type: "category",
-        data: [
-          "儿童康复",
-          "煤质分析技术",
-          "矿山安全技术与监察",
-          "森林消防(森林防火指挥与通讯)",
-          "固体矿床露天开采技术",
-          "科技成果中介服务",
-          "全球健康学",
-          "大气探测技术",
-          "乐器制造技术",
-          "会宗教学计学",
-        ],
+        data: coolplanlist1
       },
       xAxis: {
         type: "value",
       },
       series: [
         {
-          data: [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            1,
-            1,
-            1,
-            1,
-          ],
+          data: coolplanlist2,
           type: "bar",
           label: {
             show: true,
             position: "right",
           },
+            itemStyle: {
+                normal: {
+                    //这里是重点
+                    color: function(params) {
+                        //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                        var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83', '#ca8622','#c23531','#2f4554', '#61a0a8', '#d48265'];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
         },
       ],
     };

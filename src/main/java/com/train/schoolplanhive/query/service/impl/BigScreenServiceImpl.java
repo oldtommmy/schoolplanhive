@@ -6,6 +6,7 @@ import com.train.schoolplanhive.query.dao.CoolMajorDao;
 import com.train.schoolplanhive.query.dao.HotMajorDao;
 import com.train.schoolplanhive.query.dao.ProvincePlanDao;
 import com.train.schoolplanhive.query.model.AreaPlan;
+import com.train.schoolplanhive.query.model.EnrollPlanStatis;
 import com.train.schoolplanhive.query.model.ProfessPlan;
 import com.train.schoolplanhive.query.model.ProvincePlan;
 import com.train.schoolplanhive.query.service.BigScreenService;
@@ -31,12 +32,12 @@ public class BigScreenServiceImpl implements BigScreenService {
     private ProvincePlanDao provincePlanDao;
 
     @Override
-    public List<ProfessPlan> getHotMajors(int topn) {
+    public List<EnrollPlanStatis> getHotMajors(int topn) {
         return hotMajorDao.getHotProfessPlan(topn);
     }
 
     @Override
-    public List<ProfessPlan> getCoolMajors(int topn) {
+    public List<EnrollPlanStatis> getCoolMajors(int topn) {
         return coolMajorDao.getCoolProfess(topn);
     }
 

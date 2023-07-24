@@ -1,6 +1,7 @@
 package com.train.schoolplanhive.query.dao;
 
 
+import com.train.schoolplanhive.query.model.EnrollPlanStatis;
 import com.train.schoolplanhive.query.model.ProfessPlan;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -17,6 +18,11 @@ import java.util.List;
 @Repository
 public interface HotMajorDao {
 
-    @Select("select * from hot_major order by plan asc limit #{topn}")
-    public List<ProfessPlan> getHotProfessPlan(int topn);
+    @Select({"<script>",
+            "select id,subject,province,school,year,major_code, sum(plan) as plan_total ,profess from enrollment_plan " ,
+            "group by left(subject, 3) order by plan_total asc",
+            "limit #{topn}",
+            "</script>"
+    })
+    public List<EnrollPlanStatis> getHotProfessPlan(int topn);
 }
