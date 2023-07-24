@@ -1,5 +1,6 @@
 package com.train.schoolplanhive.user.dao;
 import com.train.schoolplanhive.user.model.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -14,6 +15,12 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserDao {
+    @Insert("INSERT INTO userinfo (username, real_name, email, pwd) " +
+            "VALUES " +
+            "(#{username}, #{realName}, " +
+            "#{email}, #{pwd})")
+    public void insert(User user);
+
     @Select("select * from userinfo where username=#{username}")
     public User getUser(String username);
 

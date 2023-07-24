@@ -37,21 +37,21 @@
     <h5>注册新用户</h5>
 
     <!-- form -->
-    <form>
+    <form action="user/toRegister" method="post">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="用户名" required autofocus>
+            <input type="text" class="form-control" name="username" placeholder="用户名" required autofocus>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="真实姓名" required>
+            <input type="text" class="form-control" name="realName" placeholder="真实姓名" required>
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email" required>
+            <input type="email" class="form-control" name="email" placeholder="Email" required>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="密码" required>
+            <input type="password" class="form-control" name="pwd" placeholder="密码" required>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="再次输入密码" required>
+            <input type="password" class="form-control" name="repwd" placeholder="再次输入密码" required>
         </div>
         <button class="btn btn-primary btn-block">注册</button>
         <hr>

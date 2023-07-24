@@ -20,4 +20,6 @@ public interface UserService {
     public void updatePwd(User user);
 
     public void update(User user);
+
+    public void add(User user);
 }

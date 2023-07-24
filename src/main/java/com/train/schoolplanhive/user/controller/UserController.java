@@ -25,6 +25,32 @@ public class UserController {
     private UserService userService;
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
+
+    @RequestMapping("/toRegister")
+    public String register(Model model, HttpSession session,
+                           String username, String realName, String email,
+                           String pwd, String repwd) {
+        if (!pwd.equals(repwd)) {
+            return "register";
+        }
+
+        User user = new User();
+        user.setUsername(username);
+        user.setRealName(realName);
+        user.setEmail(email);
+        user.setPwd(pwd);
+        userService.add(user);
+        model.addAttribute("user", user);
+        session.removeAttribute("user");
+        session.setAttribute("user", user);
+        return "index";
+    }
+
+    @RequestMapping("/register.html")
+    public String toRegister() {
+        return "register";
+    }
+
     @RequestMapping("/update")
     public String update(String username, String realName, String mobile,
                         String email, String gender, String id, Model model, HttpSession session) {
@@ -68,8 +94,9 @@ public class UserController {
 
     @ApiOperation("退出登录")
     @RequestMapping ("login.html")
-    public String toLogout() {
+    public String toLogout(HttpSession session) {
         LOGGER.info("Logout");
+        session.removeAttribute("user");
         return "login";
     }
 
@@ -120,7 +147,8 @@ public class UserController {
             if (pwd.equals(repwd)) {
                 user.setPwd(pwd);
                 userService.updatePwd(user);
-                return "myprofile";
+                session.removeAttribute("user");
+                return "login";
             }
         }
         return "changepwd";
