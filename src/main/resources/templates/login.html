@@ -65,8 +65,15 @@
 
 </div>
 
+<script th:inline="javascript">
+    var status = [[${loginStatus}]];
+    if (status === 'error') {
+        alert("密码错误或用户不存在");
+    }
+</script>
 <!-- Plugin scripts -->
-<script src="vendors/bundle.js"></script>
+<script src="vendors/bundle.js">
+</script>
 
 <!-- App scripts -->
 <script src="assets/js/app.js"></script>
