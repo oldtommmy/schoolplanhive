@@ -117,16 +117,18 @@ public class UserController {
         LOGGER.info(username +" begin login>>>>>");
         User loginUser = userService.login(username);
         if(loginUser == null){
-            LOGGER.error("用户名或者密码错误！");
+            LOGGER.error("用户名或者密码错误");
+            model.addAttribute("loginStatus", "error");
             return "login";
         }else{
             if(loginUser.getPwd().equals(pwd)){
                 session.setAttribute("user", loginUser);
                 model.addAttribute("user", loginUser);
+                model.addAttribute("loginStatus", "success");
                 System.out.println(loginUser);
                 return "index";
             }else{
-                session.setAttribute("status", "Error");
+                model.addAttribute("loginStatus", "error");
                 LOGGER.error("用户名或者密码错误！");
                 return "login";
             }
