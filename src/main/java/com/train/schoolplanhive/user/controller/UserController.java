@@ -149,10 +149,12 @@ public class UserController {
             if (pwd.equals(repwd)) {
                 user.setPwd(pwd);
                 userService.updatePwd(user);
+                model.addAttribute("changeStatus", "success");
                 session.removeAttribute("user");
                 return "login";
             }
         }
+        model.addAttribute("changeStatus", "error");
         return "changepwd";
     }
 }
