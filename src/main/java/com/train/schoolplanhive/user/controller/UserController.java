@@ -124,7 +124,6 @@ public class UserController {
                 session.setAttribute("user", loginUser);
                 model.addAttribute("user", loginUser);
                 System.out.println(loginUser);
-                Thread.sleep(1000);
                 return "index";
             }else{
                 session.setAttribute("status", "Error");

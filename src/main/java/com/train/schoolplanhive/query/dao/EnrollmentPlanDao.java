@@ -82,7 +82,7 @@ public interface EnrollmentPlanDao {
             "<if test='school != null'>school = #{school}</if>",
             "<if test='province != null'>and province = #{province}</if>",
             "</where>",
-            "group by subject order by plan_total ",
+            "group by left(subject, 3) order by plan_total ",
             "<if test='desc != null'>desc</if>",
             "<if test='desc == null'>asc</if>",
             "limit #{topn}",
