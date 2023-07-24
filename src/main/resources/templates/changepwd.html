@@ -113,7 +113,7 @@
 
         <div class="navigation-menu-tab">
             <div>
-                <div class="navigation-menu-tab-header" data-toggle="tooltip" title="花木兰" data-placement="right">
+                <div class="navigation-menu-tab-header" data-toggle="tooltip" th:text="${user.username}" data-placement="right">
                     <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
                         <figure class="avatar avatar-sm">
                             <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="avatar">
@@ -125,8 +125,8 @@
                                 <img src="assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="image">
                             </figure>
                             <h6 class="d-flex align-items-center justify-content-center">
-                                花木兰
-                                <a href="#" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
+                                <div th:text="${user.username}"></div>
+                                <a href="user/profilemodify.html" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
                                     <i data-feather="edit-2"></i>
                                 </a>
                             </h6>
@@ -134,12 +134,12 @@
                         </div>
                         <div class="dropdown-menu-body">
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item">个人中心</a>
+                                <a href="user/toProfile" class="list-group-item">个人中心</a>
                                 <a href="#" class="list-group-item d-flex">
                                     收件箱 <span class="text-muted ml-auto">18</span>
                                 </a>
                                 <a href="#" class="list-group-item" data-sidebar-target="#settings">帮助中心</a>
-                                <a href="login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
+                                <a href="user/login.html" class="list-group-item text-danger" data-sidebar-target="#settings">登出</a>
                             </div>
                         </div>
                     </div>
@@ -237,8 +237,8 @@
                 <div  class="open" id="mycenter">
                     <ul>
                         <li class="navigation-divider">个人中心</li>
-                        <li><a href="myprofile.html">我的资料</a></li>
-                        <li><a href="changepwd.html">修改密码</a></li>
+                        <li><a href="user/toProfile">我的资料</a></li>
+                        <li><a href="user/changepwd.html">修改密码</a></li>
                     </ul>
                 </div>
                 <div id="settings">
