@@ -113,7 +113,7 @@ public class UserController {
                           String pwd,
                           HttpSession session,
                           Model model,
-                          HttpServletRequest request){
+                          HttpServletRequest request) throws InterruptedException {
         LOGGER.info(username +" begin login>>>>>");
         User loginUser = userService.login(username);
         if(loginUser == null){
@@ -124,6 +124,7 @@ public class UserController {
                 session.setAttribute("user", loginUser);
                 model.addAttribute("user", loginUser);
                 System.out.println(loginUser);
+                Thread.sleep(1000);
                 return "index";
             }else{
                 session.setAttribute("status", "Error");

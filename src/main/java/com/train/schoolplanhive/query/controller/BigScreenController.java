@@ -25,7 +25,8 @@ public class BigScreenController {
     private BigScreenService bigScreenService;
 
     @RequestMapping("index.html")
-    public String showBigScreen(Model model, HttpSession session){
+    public String showBigScreen(Model model, HttpSession session) throws InterruptedException {
+
 
         List<ProfessPlan> professPlanList = bigScreenService.getHotMajors(10);
         List<ProfessPlan> coolProfessPlanList = bigScreenService.getCoolMajors(10);
@@ -49,7 +50,6 @@ public class BigScreenController {
 
         StringBuffer coolmajorPlans = new StringBuffer("[");
         StringBuffer coolmajorNames = new StringBuffer("[");
-
         for (int i = 0; i < coolProfessPlanList.size(); i++) {
             ProfessPlan professPlan = coolProfessPlanList.get(i);
 

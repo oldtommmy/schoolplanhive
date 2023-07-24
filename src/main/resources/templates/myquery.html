@@ -125,7 +125,7 @@
                             </figure>
                             <h6 class="d-flex align-items-center justify-content-center">
                                 <div th:text="${user.username}"></div>
-                                <a href="#" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
+                                <a href="user/" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="编辑个人资料">
                                     <i data-feather="edit-2"></i>
                                 </a>
                             </h6>
@@ -374,12 +374,12 @@
 <!--                                        </nav>-->
                                         <!-- 分页结束-->
                                         <div class="pagination justify-content-end">
-                                            <a th:href="@{query/myquery.html(pageNo=${pageInfo.list.pageNum}-1)}" class=" item" th:unless="${pageInfo.list.pageNum == 1}">上一页</a>
-<!--                                            <span class="page-go-form"><label>跳转至</label>-->
-<!--                                                     <input type="text" name="inputPage" id="inputPage" class="page-key" />页 document.getElementById("inputPage").value-->
-<!--                                                     <button type="button" class="page-btn" href="query/myquery.html?"+document.getElementById("inputPage").value>GO</button>-->
-<!--                                            </span>-->
-                                         <a th:href="@{query/myquery.html(pageNo=${pageInfo.list.pageNum}+1)}" class=" item" th:unless="${pageInfo.list.pageNum == pageInfo.list.pages}">下一页</a>
+                                            <a th:href="@{query/myquery.html(pageNo=${pageInfo.list.pageNum}-1)}" class="btn btn-outline-light" th:unless="${pageInfo.list.pageNum == 1}">上一页</a>
+                                            <!--                                            <span class="page-go-form"><label>跳转至</label>-->
+                                            <!--                                                     <input type="text" name="inputPage" id="inputPage" class="page-key" />页 document.getElementById("inputPage").value-->
+                                            <!--                                                     <button type="button" class="page-btn" href="query/myquery.html?"+document.getElementById("inputPage").value>GO</button>-->
+                                            <!--                                            </span>-->
+                                            <a th:href="@{query/myquery.html(pageNo=${pageInfo.list.pageNum}+1)}" class="btn btn-outline-light" th:unless="${pageInfo.list.pageNum == pageInfo.list.pages}">下一页</a>
 
                                         </div>
                               </div>
