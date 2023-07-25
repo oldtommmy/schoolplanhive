@@ -25,11 +25,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
-/**
- * create by xiuzhong.li at 2022/4/1
- *
- * @Description: 文件描述
- */
+
 @Controller
 @RequestMapping("query")
 public class QueryController {
@@ -254,7 +250,7 @@ public class QueryController {
         HSSFWorkbook wb = new HSSFWorkbook();
         OutputStream output = response.getOutputStream();
         int total = list.size();// 获取List集合的size
-        int mus = 65535;// ：excel表格一个工作表可以存储65536条）
+        int mus = 65535;// ：excel表格一个工作表可以存储65536条
         int avg = total / mus;
         for (int i = 0; i < avg + 1; i++) {
             HSSFSheet sheet = wb.createSheet("招生计划表" + (i + 1));

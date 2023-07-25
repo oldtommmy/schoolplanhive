@@ -61,6 +61,16 @@
     <!-- ./ form -->
 
 </div>
+<script th:inline="javascript">
+    var pwdStatus = [[${pwdStatus}]];
+    if (pwdStatus === 'error') {
+        alert("两次密码输入不一致")
+    }
+    var nameStatus = [[${nameStatus}]];
+    if (nameStatus === 'error') {
+        alert("用户名重复")
+    }
+</script>
 
 <!-- Plugin scripts -->
 <script src="vendors/bundle.js"></script>

@@ -7,11 +7,7 @@ import com.train.schoolplanhive.query.model.EnrollmentPlan;
 
 import java.util.List;
 
-/**
- * create by xiuzhong.li at 2022/4/2
- *
- * @Description:文件描述：
- */
+
 public interface EnrollmentPlanService {
 
     public List<EnrollmentPlan> getAllPlanList();

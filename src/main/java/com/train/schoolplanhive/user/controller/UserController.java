@@ -31,6 +31,12 @@ public class UserController {
                            String username, String realName, String email,
                            String pwd, String repwd) {
         if (!pwd.equals(repwd)) {
+            model.addAttribute("pwdStatus", "error");
+            return "register";
+        }
+        User serviceUser = userService.getUser(username);
+        if (serviceUser != null) {
+            model.addAttribute("nameStatus", "error");
             return "register";
         }
 
@@ -41,6 +47,8 @@ public class UserController {
         user.setPwd(pwd);
         userService.add(user);
         model.addAttribute("user", user);
+        model.addAttribute("nameStatus", "success");
+        model.addAttribute("pwdStatus", "success");
         session.removeAttribute("user");
         session.setAttribute("user", user);
         return "index";
@@ -149,10 +157,12 @@ public class UserController {
             if (pwd.equals(repwd)) {
                 user.setPwd(pwd);
                 userService.updatePwd(user);
+                model.addAttribute("changeStatus", "success");
                 session.removeAttribute("user");
                 return "login";
             }
         }
+        model.addAttribute("changeStatus", "error");
         return "changepwd";
     }
 }

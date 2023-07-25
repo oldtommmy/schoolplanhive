@@ -4,11 +4,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-/**
- * create by xiuzhong.li at 2022/4/1
- *
- * @Description:文件描述：招生计划条目实体
- */
+
 @Data
 public class EnrollmentPlan {
 

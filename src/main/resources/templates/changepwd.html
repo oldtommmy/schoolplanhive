@@ -347,6 +347,13 @@
 </div>
 <!-- end::main -->
 
+<script th:inline="javascript">
+    var status = [[${changeStatus}]];
+    if (status === "error") {
+        alert("原密码有误或新密码两次输入不一致");
+    }
+</script>
+
 <!-- Plugin scripts -->
 <script src="vendors/bundle.js"></script>
 

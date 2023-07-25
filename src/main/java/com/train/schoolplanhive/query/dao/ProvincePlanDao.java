@@ -7,11 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * create by xiuzhong.li at 2022/4/7
- *
- * @Description:文件描述：各省份招生计划持久层
- */
+
 @Mapper
 @Repository
 public interface ProvincePlanDao {
