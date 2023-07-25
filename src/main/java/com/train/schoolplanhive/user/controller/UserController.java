@@ -46,6 +46,7 @@ public class UserController {
         user.setEmail(email);
         user.setPwd(pwd);
         userService.add(user);
+        user = userService.getUser(username);
         model.addAttribute("user", user);
         model.addAttribute("nameStatus", "success");
         model.addAttribute("pwdStatus", "success");
