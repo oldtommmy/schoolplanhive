@@ -14,11 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-/**
- * create by xiuzhong.li at 2022/4/7
- *
- * @Description:文件描述：展示大屏控制器
- */
+
 @Controller
 @RequestMapping("bigscreen")
 public class BigScreenController {

@@ -13,11 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * create by xiuzhong.li at 2022/4/2
- *
- * @Description:文件描述：招生计划操作及查询
- */
+
 @Service
 public class EnrollmentPlanServiceImpl implements EnrollmentPlanService {
 

@@ -6,11 +6,8 @@ import com.train.schoolplanhive.user.model.User;
 import com.train.schoolplanhive.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-/**
- * create by xiuzhong.li at 2022/5/9
- *
- * @Description:文件描述：
- */
+
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired

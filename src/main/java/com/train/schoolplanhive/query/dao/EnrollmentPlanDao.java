@@ -9,11 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * create by xiuzhong.li at 2022/4/1
- *
- * @Description:文件描述：招生计划持久层接口
- */
 @Repository
 @Mapper
 public interface EnrollmentPlanDao {

@@ -4,11 +4,7 @@ import com.train.schoolplanhive.query.model.*;
 
 import java.util.List;
 
-/**
- * create by xiuzhong.li at 2022/4/7
- *
- * @Description:文件描述：
- */
+
 public interface BigScreenService {
 
     //获取热门专业
